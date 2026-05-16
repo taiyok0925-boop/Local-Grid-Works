@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LOCAL GRID WORKS | 設楽を最高の遊び場へ</title>
+<meta name="description" content="株式会社LOCAL GRID WORKS — 設楽ダム湖を核とした地域活性化・アウトドアフィールド開発会社。" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          bebas: ['"Bebas Neue"', 'sans-serif'],
+          noto:  ['"Noto Sans JP"', 'sans-serif'],
+          inter: ['Inter', 'sans-serif'],
+        },
+        colors: {
+          /* サイト全体で使うアースカラーパレット */
+          earth: {
+            950: '#100e0c',  /* 最も暗い — 岩の陰 */
+            900: '#1c1917',  /* stone-900 */
+            800: '#292524',  /* stone-800 */
+            700: '#44403c',  /* stone-700 */
+            600: '#57534e',  /* stone-600 */
+            400: '#a8a29e',  /* stone-400 */
+            200: '#e7e5e4',  /* stone-200 */
+            100: '#f5f5f4',  /* stone-100 */
+          },
+          clay: {
+            700: '#b45309',  /* amber-700 — 落ち着いたアクセント */
+            600: '#c2410c',  /* orange-700 — テラコッタ */
+            500: '#d97706',  /* amber-600 */
+            400: '#ea580c',  /* orange-600 — ホバー時に使う程度 */
+          }
+        }
+      },
+    },
+  };
+</script>
+
+<style>
+  body {
+    font-family: 'Inter','Noto Sans JP',sans-serif;
+    background-color: #100e0c;
+    color: #e7e5e4;
+  }
+  html { scroll-behavior: smooth; }
+
+  ::-webkit-scrollbar       { width: 5px; }
+  ::-webkit-scrollbar-track { background: #100e0c; }
+  ::-webkit-scrollbar-thumb { background: #c2410c; border-radius: 2px; }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content:''; position:absolute; bottom:-4px; left:0;
+    width:0; height:2px; background:#c2410c;
+    transition: width .3s ease;
+  }
+  .nav-link:hover::after { width:100%; }
+
+  .form-input {
+    display:block; width:100%;
+    background:#1c1917; border:1px solid #44403c;
+    color:#e7e5e4; outline:none;
+    transition:border-color .3s ease, box-shadow .3s ease;
+    -webkit-appearance:none;
+  }
+  .form-input::placeholder { color:#57534e; }
+  .form-input:focus {
+    border-color:#c2410c;
+    box-shadow:0 0 0 3px rgba(194,65,12,.15);
+  }
+
+  .fade-in { opacity:0; transform:translateY(24px); transition:opacity .85s ease, transform .85s ease; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  /* サービス横並びリスト */
+  .service-row {
+    border-top: 1px solid #292524;
+    transition: background-color .25s ease;
+  }
+  .service-row:last-child { border-bottom: 1px solid #292524; }
+  .service-row:hover { background-color: rgba(194,65,12,.05); }
+
+  /* パートナーカード */
+  .partner-card { border:1px solid #292524; transition:border-color .3s ease, background-color .3s ease; }
+  .partner-card:hover { border-color:#c2410c; background-color:rgba(194,65,12,.05); }
+
+  /* 会社概要テーブル */
+  .profile-row { transition:background-color .2s ease; }
+  .profile-row:hover { background-color:rgba(194,65,12,.05); }
+
+  /* プルクオート */
+  .pull-quote { border-left: 3px solid #c2410c; }
+
+  /* テキストはみ出し防止 */
+  .clip-text { overflow: hidden; }
+
+  /* ジャーナル */
+  .journal-row { border-top: 1px solid #292524; }
+  .journal-row:hover { background-color: rgba(194,65,12,.04); }
+
+  /* アクセントカラー変数（CSS） */
+  :root {
+    --accent:     #c2410c;
+    --accent-dim: rgba(194,65,12,.12);
+    --bg-dark:    #100e0c;
+    --bg-mid:     #1c1917;
+    --bg-card:    #211f1d;
+    --border:     #292524;
+    --border-dim: #3a3633;
+    --text-main:  #e7e5e4;
+    --text-muted: #a8a29e;
+    --text-dim:   #57534e;
+  }
+</style>
+</head>
+<body>
+
+
+<!-- ================================================================
+  NAVIGATION
+================================================================ -->
+<nav class="fixed inset-x-0 top-0 z-50 h-14 backdrop-blur-md border-b"
+     style="background:rgba(16,14,12,.95); border-color:#292524;">
+  <div class="max-w-screen-xl mx-auto h-full px-5 sm:px-8 flex items-center justify-between">
+
+    <a href="#hero" class="flex items-center gap-2 shrink-0">
+      <span class="inline-block w-[3px] h-5" style="background:#c2410c;"></span>
+      <span class="font-bebas text-base sm:text-lg tracking-[.18em]" style="color:#e7e5e4;">LOCAL GRID WORKS</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#mission"  class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">MISSION</a>
+      <a href="#services" class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">SERVICES</a>
+      <a href="#company"  class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">COMPANY</a>
+      <a href="#journal"  class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">JOURNAL</a>
+      <a href="#contact"
+         class="text-[10px] font-bold tracking-[.25em] uppercase px-5 py-2 transition-colors duration-200"
+         style="background:#c2410c; color:#f5f5f4;"
+         onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#c2410c'">CONTACT</a>
+    </div>
+
+    <button id="nav-toggle" class="md:hidden transition-colors" style="color:#a8a29e;" aria-label="menu">
+      <i id="nav-icon" class="fas fa-bars text-lg"></i>
+    </button>
+  </div>
+
+  <div id="mobile-drawer" class="hidden md:hidden border-t" style="background:#1c1917; border-color:#292524;">
+    <div class="px-5 py-6 flex flex-col gap-1">
+      <a href="#mission"  class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">MISSION</a>
+      <a href="#services" class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">SERVICES</a>
+      <a href="#company"  class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">COMPANY</a>
+      <a href="#journal"  class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">JOURNAL</a>
+      <a href="#contact"  class="mobile-link mt-4 block text-[11px] font-bold tracking-[.25em] uppercase px-5 py-3 text-center transition-colors" style="background:#c2410c; color:#f5f5f4;">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ================================================================
+  HERO
+================================================================ -->
+<section id="hero" class="relative w-full h-screen min-h-[640px] overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+      alt="Mountain lake"
+      class="w-full h-full object-cover"
+    />
+    <!-- 冷たい青ではなく、温かみのある暗いオーバーレイ -->
+    <div class="absolute inset-0" style="background:rgba(16,14,12,.58);"></div>
+    <div class="absolute inset-x-0 bottom-0 h-80" style="background:linear-gradient(to top, #100e0c, transparent);"></div>
+  </div>
+
+  <div class="absolute bottom-16 left-0 z-10 px-5 sm:px-10 lg:px-16 max-w-3xl">
+    <p class="text-[10px] font-bold tracking-[.4em] uppercase font-inter mb-6" style="color:#c2410c;">
+      Est. 2026 — Shitara, Aichi, Japan
+    </p>
+    <div class="clip-text">
+      <h1 class="font-noto font-black text-[clamp(3.5rem,10vw,8rem)] leading-[1] tracking-tight mb-1" style="color:#e7e5e4;">
+        設楽を最高の
+      </h1>
+    </div>
+    <div class="clip-text">
+      <h1 class="font-noto font-black text-[clamp(3.5rem,10vw,8rem)] leading-[1] tracking-tight mb-8" style="color:#c2410c;">
+        遊び場へ。
+      </h1>
+    </div>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+      <a href="#contact"
+         class="inline-flex items-center gap-3 font-inter font-bold text-[11px] tracking-[.2em] uppercase px-8 py-3.5 transition-all duration-300 group"
+         style="background:#c2410c; color:#f5f5f4;"
+         onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#c2410c'">
+        <span>EXPLORE THE GRID</span>
+        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform duration-300"></i>
+      </a>
+      <p class="font-bebas text-base sm:text-xl tracking-[.25em] uppercase" style="color:#78716c;">
+        THE ULTIMATE PLAYGROUND GRID.
+      </p>
+    </div>
+  </div>
+
+  <div class="absolute bottom-12 right-8 z-10 flex flex-col items-center gap-2">
+    <div class="w-px h-12" style="background:linear-gradient(to bottom, #78716c, transparent);"></div>
+    <span class="text-[9px] tracking-[.3em] uppercase" style="color:#57534e; writing-mode:vertical-rl;">Scroll</span>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  01. MISSION
+================================================================ -->
+<section id="mission" class="pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden" style="background:#100e0c;">
+  <div class="fade-in">
+
+    <div class="px-5 sm:px-10 lg:px-16 mb-3">
+      <p class="text-[10px] font-bold tracking-[.35em] uppercase font-inter mb-4" style="color:#c2410c;">01. MISSION / CONCEPT</p>
+    </div>
+    <div class="px-5 sm:px-10 lg:px-16 clip-text">
+      <h2 class="font-bebas tracking-wide leading-[.9] uppercase whitespace-nowrap" style="font-size:clamp(4rem,13vw,11rem); color:#e7e5e4;">
+        BUILD THE GRID.
+      </h2>
+    </div>
+    <div class="px-5 sm:px-10 lg:px-16 clip-text mb-16">
+      <h2 class="font-bebas tracking-wide leading-[.9] uppercase whitespace-nowrap" style="font-size:clamp(4rem,13vw,11rem); color:#c2410c;">
+        UNLOCK THE FIELD.
+      </h2>
+    </div>
+
+    <div class="px-5 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+
+      <div class="lg:col-span-4 lg:pt-2">
+        <div class="pull-quote pl-5">
+          <p class="text-lg sm:text-xl font-semibold font-noto leading-relaxed" style="color:#d6d3d1;">
+            近い将来ダム湖が完成する設楽。「遊べるダム湖」の実現に向けて。
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 lg:col-start-7">
+        <p class="text-sm leading-relaxed font-noto mb-6" style="color:#a8a29e;">
+          私たちは、ダム湖という地域資源を『ただ眺めるもの』から『誰もが楽しめるフィールド』へとアップデートしたいと考えて活動しています。
+        </p>
+        <p class="text-sm leading-relaxed font-noto mb-10" style="color:#a8a29e;">
+          公共空間・人・自然・アクティビティをグリッド（網の目）のように繋ぎ合わせ、新しい地域の価値を創造します。
+        </p>
+        <div class="flex gap-8">
+          <div>
+            <div class="font-bebas text-xl tracking-widest" style="color:#c2410c;">CONNECT</div>
+            <div class="text-[10px] mt-0.5 font-noto" style="color:#57534e;">人・地域・自然</div>
+          </div>
+          <div>
+            <div class="font-bebas text-xl tracking-widest" style="color:#c2410c;">CREATE</div>
+            <div class="text-[10px] mt-0.5 font-noto" style="color:#57534e;">新しい価値</div>
+          </div>
+          <div>
+            <div class="font-bebas text-xl tracking-widest" style="color:#c2410c;">SUSTAIN</div>
+            <div class="text-[10px] mt-0.5 font-noto" style="color:#57534e;">持続可能な場</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  02. SERVICES
+================================================================ -->
+<section id="services" class="py-24 sm:py-32" style="background:#1c1917;">
+  <div class="max-w-screen-xl mx-auto px-5 sm:px-10 lg:px-16">
+    <div class="fade-in">
+
+      <div class="flex items-baseline gap-4 mb-14">
+        <span class="font-bebas text-5xl leading-none" style="color:#c2410c;">02.</span>
+        <span class="text-[10px] font-bold tracking-[.3em] uppercase font-inter" style="color:#57534e;">SERVICES & FIELD OPERATIONS</span>
+      </div>
+
+      <!-- 01 -->
+      <div class="service-row group py-8 sm:py-10 px-2 sm:px-4">
+        <div class="grid grid-cols-12 gap-4 items-start">
+          <div class="col-span-1">
+            <span class="font-bebas text-5xl sm:text-7xl leading-none transition-colors duration-300 group-hover:opacity-40" style="color:#3a3633;">01</span>
+          </div>
+          <div class="col-span-11 sm:col-span-4 sm:col-start-2 pt-1">
+            <div class="flex items-center gap-3 mb-1">
+              <i class="fas fa-water text-xs" style="color:#c2410c;"></i>
+              <span class="text-[10px] font-bold tracking-[.25em] uppercase font-inter" style="color:#c2410c;">LAKEFRONT PRODUCTION</span>
+            </div>
+            <h3 class="font-noto font-black text-xl sm:text-2xl leading-snug" style="color:#e7e5e4;">ダム湖活用プロデュース</h3>
+          </div>
+          <div class="col-span-12 sm:col-span-6 sm:col-start-7 pl-0 sm:pl-4 pt-0 sm:pt-1">
+            <p class="text-sm leading-relaxed font-noto" style="color:#a8a29e;">
+              水面利用のアクティビティ企画・運営。ただの観光地ではない、ダイナミックな水辺のエンターテインメントを創造。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="service-row group py-8 sm:py-10 px-2 sm:px-4">
+        <div class="grid grid-cols-12 gap-4 items-start">
+          <div class="col-span-1">
+            <span class="font-bebas text-5xl sm:text-7xl leading-none transition-colors duration-300 group-hover:opacity-40" style="color:#3a3633;">02</span>
+          </div>
+          <div class="col-span-11 sm:col-span-4 sm:col-start-2 pt-1">
+            <div class="flex items-center gap-3 mb-1">
+              <i class="fas fa-network-wired text-xs" style="color:#c2410c;"></i>
+              <span class="text-[10px] font-bold tracking-[.25em] uppercase font-inter" style="color:#c2410c;">COMMUNITY GRID</span>
+            </div>
+            <h3 class="font-noto font-black text-xl sm:text-2xl leading-snug" style="color:#e7e5e4;">地域連携支援</h3>
+          </div>
+          <div class="col-span-12 sm:col-span-6 sm:col-start-7 pl-0 sm:pl-4 pt-0 sm:pt-1">
+            <p class="text-sm leading-relaxed font-noto" style="color:#a8a29e;">
+              ローカルネットワークを最大限に活かしたイベント・プロジェクトの運営。人と地域を網の目のように繋ぐ。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="service-row group py-8 sm:py-10 px-2 sm:px-4">
+        <div class="grid grid-cols-12 gap-4 items-start">
+          <div class="col-span-1">
+            <span class="font-bebas text-5xl sm:text-7xl leading-none transition-colors duration-300 group-hover:opacity-40" style="color:#3a3633;">03</span>
+          </div>
+          <div class="col-span-11 sm:col-span-4 sm:col-start-2 pt-1">
+            <div class="flex items-center gap-3 mb-1">
+              <i class="fas fa-hammer text-xs" style="color:#c2410c;"></i>
+              <span class="text-[10px] font-bold tracking-[.25em] uppercase font-inter" style="color:#c2410c;">FIELD DEVELOPMENT</span>
+            </div>
+            <h3 class="font-noto font-black text-xl sm:text-2xl leading-snug" style="color:#e7e5e4;">アウトドア・フィールド開発</h3>
+          </div>
+          <div class="col-span-12 sm:col-span-6 sm:col-start-7 pl-0 sm:pl-4 pt-0 sm:pt-1">
+            <p class="text-sm leading-relaxed font-noto" style="color:#a8a29e;">
+              遊びを豊かにするインフラや拠点の整備。自然を切り拓き、タフで持続可能なフィールドを構築。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPLORE SHITARA バナー -->
+      <div class="mt-14 relative overflow-hidden border transition-all duration-500 group cursor-pointer"
+           style="border-color:#3a3633; background:#211f1d;"
+           onmouseover="this.style.borderColor='#c2410c'" onmouseout="this.style.borderColor='#3a3633'">
+        <div class="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80"
+            alt="Shitara terrain"
+            class="w-full h-full object-cover opacity-[.12] group-hover:opacity-[.2] group-hover:scale-[1.03] transition-all duration-700"
+          />
+          <div class="absolute inset-0" style="background:linear-gradient(to right, rgba(33,31,29,.95), transparent);"></div>
+        </div>
+        <div class="relative z-10 p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-7">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-[9px] font-bold tracking-[.3em] uppercase px-3 py-1 font-inter" style="background:#c2410c; color:#f5f5f4;">COMING SOON</span>
+              <span class="text-[9px] tracking-[.2em] uppercase font-inter" style="color:#57534e;">/ FIELD GUIDE</span>
+            </div>
+            <h3 class="font-bebas text-4xl sm:text-5xl tracking-wide uppercase mb-2" style="color:#e7e5e4;">EXPLORE SHITARA</h3>
+            <p class="text-sm font-noto max-w-xs" style="color:#78716c;">設楽のフィールド・地形・将来施設の全てを収録した完全フィールドガイド。近日公開。</p>
+          </div>
+          <div class="shrink-0 flex items-center gap-3 border px-6 py-4 transition-all duration-300"
+               style="border-color:#44403c;"
+               onmouseover="this.style.borderColor='#c2410c'" onmouseout="this.style.borderColor='#44403c'">
+            <span class="font-bebas text-lg tracking-widest uppercase transition-colors duration-300" style="color:#a8a29e;">VIEW THE TERRAIN</span>
+            <i class="fas fa-mountain text-sm transition-colors duration-300" style="color:#57534e;"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  03. COMPANY PROFILE
+================================================================ -->
+<section id="company" class="pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden" style="background:#100e0c;">
+  <div class="fade-in">
+
+    <div class="px-5 sm:px-10 lg:px-16 mb-3">
+      <p class="text-[10px] font-bold tracking-[.35em] uppercase font-inter mb-4" style="color:#c2410c;">03. COMPANY PROFILE</p>
+    </div>
+    <div class="px-5 sm:px-10 lg:px-16 clip-text mb-16">
+      <h2 class="font-bebas tracking-wide leading-[.95] uppercase" style="font-size:clamp(2.8rem,8.5vw,7.5rem); color:#e7e5e4;">
+        LOCAL GRID WORKS,<br/><span style="color:#3a3633;">Inc.</span>
+      </h2>
+    </div>
+
+    <div class="px-5 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+
+      <div class="lg:col-span-3">
+        <p class="text-sm leading-relaxed font-noto mb-8" style="color:#78716c;">
+          2026年5月、愛知県設楽町に設立。ダム湖完成に向けた地域の変革期に、アウトドアフィールドの可能性を最大化するために集結。
+        </p>
+        <!-- ピクセルグリッド装飾 -->
+        <div class="inline-grid grid-cols-5 gap-[3px] opacity-50">
+          <div class="w-4 h-4" style="background:#c2410c;"></div>   <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:rgba(194,65,12,.35);"></div>
+          <div class="w-4 h-4" style="background:#292524;"></div>   <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:rgba(194,65,12,.55);"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>
+          <div class="w-4 h-4" style="background:#3a3633;"></div>   <div class="w-4 h-4" style="background:rgba(194,65,12,.25);"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:rgba(194,65,12,.45);"></div>
+          <div class="w-4 h-4" style="background:rgba(194,65,12,.15);"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:#c2410c;"></div>  <div class="w-4 h-4" style="background:#292524;"></div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-8 lg:col-start-5 border overflow-hidden" style="border-color:#292524;">
+        <div class="profile-row flex border-b" style="border-color:#292524;">
+          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
+            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">商号</span>
+          </div>
+          <div class="px-5 py-4 flex items-center">
+            <span class="text-sm font-noto" style="color:#d6d3d1;">株式会社LOCAL GRID WORKS</span>
+          </div>
+        </div>
+        <div class="profile-row flex border-b" style="border-color:#292524;">
+          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
+            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">設立</span>
+          </div>
+          <div class="px-5 py-4 flex items-center">
+            <span class="text-sm font-noto" style="color:#d6d3d1;">2026年5月</span>
+          </div>
+        </div>
+        <div class="profile-row flex border-b" style="border-color:#292524;">
+          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
+            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">代表取締役</span>
+          </div>
+          <div class="px-5 py-4 flex items-center">
+            <span class="text-sm font-noto" style="color:#d6d3d1;">近藤 友樹</span>
+          </div>
+        </div>
+        <div class="profile-row flex border-b" style="border-color:#292524;">
+          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
+            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">取締役</span>
+          </div>
+          <div class="px-5 py-4">
+            <div class="text-sm font-noto leading-[2.2]" style="color:#d6d3d1;">
+              麻野間 達也<br>安藤 豪規<br>小池 知宏
+            </div>
+          </div>
+        </div>
+        <div class="profile-row flex border-b" style="border-color:#292524;">
+          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
+            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">所在地</span>
+          </div>
+          <div class="px-5 py-4 flex items-center">
+            <span class="text-sm font-noto" style="color:#d6d3d1;">愛知県北設楽郡設楽町</span>
+          </div>
+        </div>
+        <div class="profile-row flex">
+          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
+            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">事業内容</span>
+          </div>
+          <div class="px-5 py-4">
+            <p class="text-sm font-noto leading-relaxed" style="color:#d6d3d1;">
+              地域活性化事業、指定管理者・アウトドア施設運営、イベント企画・制作・運営・備品のレンタル・運営・デザイン・コンサルティング事業
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  04. JOURNAL & PARTNERS
+================================================================ -->
+<section id="journal" class="py-24 sm:py-32" style="background:#1c1917;">
+  <div class="max-w-screen-xl mx-auto px-5 sm:px-10 lg:px-16">
+    <div class="fade-in">
+
+      <div class="flex items-baseline gap-4 mb-4">
+        <span class="font-bebas text-5xl leading-none" style="color:#c2410c;">04.</span>
+        <span class="text-[10px] font-bold tracking-[.3em] uppercase font-inter" style="color:#57534e;">EXPEDITION LOG & PARTNERS</span>
+      </div>
+      <p class="text-sm font-noto mb-14 max-w-sm" style="color:#78716c;">
+        実績の代わりに、ダム湖が完成するまでの泥臭い開拓プロセスを記録する。
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+
+        <!-- ログ -->
+        <div class="lg:col-span-7 flex flex-col">
+
+          <!-- LOG #002 -->
+          <article class="journal-row group cursor-pointer py-8 px-0 sm:px-2 transition-colors duration-300">
+            <div class="flex gap-6 sm:gap-10 items-start">
+              <div class="shrink-0 text-right">
+                <div class="font-bebas text-4xl sm:text-5xl leading-none transition-colors duration-300" style="color:#3a3633;">05.16</div>
+                <div class="font-bebas text-lg leading-none" style="color:#3a3633;">2026</div>
+              </div>
+              <div class="flex-1 pt-1">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#c2410c;"></span>
+                  <span class="text-[10px] tracking-[.3em] uppercase font-inter" style="color:#44403c;">LOG #002</span>
+                </div>
+                <h4 class="font-bold text-base sm:text-lg font-noto mb-2 transition-colors duration-300 group-hover:opacity-80" style="color:#e7e5e4;">
+                  設楽ダム周辺フィールドワーク実施
+                </h4>
+                <p class="text-sm leading-relaxed font-noto" style="color:#78716c;">
+                  現地調査にて周辺地形・水面エリアのポテンシャルを確認。フィールド開発計画の初期段階に入る。
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- LOG #001 -->
+          <article class="journal-row group cursor-pointer py-8 px-0 sm:px-2 transition-colors duration-300">
+            <div class="flex gap-6 sm:gap-10 items-start">
+              <div class="shrink-0 text-right">
+                <div class="font-bebas text-4xl sm:text-5xl leading-none" style="color:#3a3633;">05.01</div>
+                <div class="font-bebas text-lg leading-none" style="color:#3a3633;">2026</div>
+              </div>
+              <div class="flex-1 pt-1">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#c2410c;"></span>
+                  <span class="text-[10px] tracking-[.3em] uppercase font-inter" style="color:#44403c;">LOG #001</span>
+                </div>
+                <h4 class="font-bold text-base sm:text-lg font-noto mb-2 transition-colors duration-300 group-hover:opacity-80" style="color:#e7e5e4;">
+                  株式会社LOCAL GRID WORKS 始動
+                </h4>
+                <p class="text-sm leading-relaxed font-noto" style="color:#78716c;">
+                  設楽町に新たな会社が産声を上げる。チームが集結し、ダム湖完成後の設楽を最高の遊び場にするための活動が始まった。
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Upcoming -->
+          <div class="journal-row border-b py-8 px-0 sm:px-2" style="border-color:#292524;">
+            <div class="flex gap-6 sm:gap-10 items-center">
+              <div class="shrink-0 text-right">
+                <div class="font-bebas text-4xl sm:text-5xl leading-none" style="color:#292524;">——</div>
+                <div class="font-bebas text-lg leading-none" style="color:#292524;">——</div>
+              </div>
+              <div>
+                <span class="text-[10px] tracking-[.3em] uppercase font-inter block mb-1" style="color:#44403c;">UPCOMING</span>
+                <p class="text-sm font-noto" style="color:#44403c;">開拓の記録は続く。</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- パートナー -->
+        <div class="lg:col-span-4 lg:col-start-9">
+          <div class="mb-6 pb-5 border-b" style="border-color:#292524;">
+            <h3 class="font-bebas text-2xl tracking-[.15em] uppercase" style="color:#e7e5e4;">THE GRID</h3>
+            <p class="text-xs mt-1 font-noto" style="color:#57534e;">連携パートナー / Associated Network</p>
+          </div>
+          <div class="flex flex-col gap-3">
+
+            <div class="partner-card p-4 flex items-center justify-between cursor-pointer group">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 border flex items-center justify-center transition-all duration-300" style="border-color:#3a3633;">
+                  <i class="fas fa-building text-xs transition-colors duration-300" style="color:#57534e;"></i>
+                </div>
+                <div>
+                  <div class="font-bebas text-lg tracking-widest transition-colors duration-300" style="color:#e7e5e4;">TCC</div>
+                  <div class="text-[9px] tracking-widest uppercase font-inter" style="color:#57534e;">Partner / Node</div>
+                </div>
+              </div>
+              <i class="fas fa-external-link-alt text-[9px] transition-colors duration-300" style="color:#44403c;"></i>
+            </div>
+
+            <div class="partner-card p-4 flex items-center justify-between cursor-pointer group">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 border flex items-center justify-center transition-all duration-300" style="border-color:#3a3633;">
+                  <i class="fas fa-seedling text-xs transition-colors duration-300" style="color:#57534e;"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-bold font-noto transition-colors duration-300" style="color:#e7e5e4;">遊べる花屋</div>
+                  <div class="text-[9px] tracking-widest uppercase font-inter" style="color:#57534e;">Partner / Node</div>
+                </div>
+              </div>
+              <i class="fas fa-external-link-alt text-[9px]" style="color:#44403c;"></i>
+            </div>
+
+            <div class="partner-card p-4 flex items-center justify-between cursor-pointer group">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 border flex items-center justify-center transition-all duration-300" style="border-color:#3a3633;">
+                  <i class="fas fa-tools text-xs transition-colors duration-300" style="color:#57534e;"></i>
+                </div>
+                <div>
+                  <div class="font-bebas text-lg tracking-widest transition-colors duration-300" style="color:#e7e5e4;">51WORKS</div>
+                  <div class="text-[9px] tracking-widest uppercase font-inter" style="color:#57534e;">Partner / Node</div>
+                </div>
+              </div>
+              <i class="fas fa-external-link-alt text-[9px]" style="color:#44403c;"></i>
+            </div>
+
+            <div class="border border-dashed p-3 flex items-center gap-2" style="border-color:#292524;">
+              <i class="fas fa-plus text-xs" style="color:rgba(194,65,12,.4);"></i>
+              <span class="text-[9px] tracking-[.25em] uppercase font-inter" style="color:#44403c;">Network Expanding</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  05. CONTACT
+================================================================ -->
+<section id="contact" class="pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden" style="background:#100e0c;">
+  <div class="fade-in">
+
+    <div class="px-5 sm:px-10 lg:px-16 mb-3">
+      <p class="text-[10px] font-bold tracking-[.35em] uppercase font-inter mb-4" style="color:#c2410c;">05. JOIN THE GRID / CONTACT</p>
+    </div>
+    <div class="px-5 sm:px-10 lg:px-16 clip-text mb-14">
+      <h2 class="font-bebas tracking-wide leading-[.9] uppercase" style="font-size:clamp(4rem,13vw,11rem); color:#e7e5e4;">
+        JOIN THE<br/><span style="color:#c2410c;">GRID.</span>
+      </h2>
+    </div>
+
+    <div class="px-5 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+
+      <div class="lg:col-span-4">
+        <p class="text-sm leading-relaxed font-noto mb-8" style="color:#a8a29e;">
+          ご連絡はこちらから。事業のご相談、パートナーシップ、取材、お仕事のご依頼はお気軽にメッセージをお送りください。
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 shrink-0 border flex items-center justify-center" style="border-color:rgba(194,65,12,.4);">
+            <i class="fas fa-map-marker-alt text-xs" style="color:#c2410c;"></i>
+          </div>
+          <div>
+            <div class="text-[10px] tracking-[.25em] uppercase font-inter mb-0.5" style="color:#57534e;">Location</div>
+            <div class="text-sm font-noto" style="color:#a8a29e;">愛知県北設楽郡設楽町</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 lg:col-start-6">
+        <form id="contact-form" novalidate class="flex flex-col gap-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">
+                お名前 <span style="color:#c2410c;">*</span>
+              </label>
+              <input type="text" name="name" placeholder="山田 太郎" required class="form-input px-4 py-3 text-sm font-noto" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">貴社名</label>
+              <input type="text" name="company" placeholder="株式会社 ○○" class="form-input px-4 py-3 text-sm font-noto" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">
+              メールアドレス <span style="color:#c2410c;">*</span>
+            </label>
+            <input type="email" name="email" placeholder="example@company.com" required class="form-input px-4 py-3 text-sm font-inter" />
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">
+              お問い合わせ内容 <span style="color:#c2410c;">*</span>
+            </label>
+            <textarea name="message" rows="6" required placeholder="お問い合わせ内容をご記入ください。"
+              class="form-input px-4 py-3 text-sm font-noto resize-none"></textarea>
+          </div>
+          <button type="submit" id="submit-btn"
+            class="w-full flex items-center justify-center gap-3 font-inter font-bold text-xs tracking-[.2em] uppercase px-8 py-4 transition-all duration-300 group"
+            style="background:#c2410c; color:#f5f5f4;">
+            <span id="submit-label">SEND MESSAGE</span>
+            <i id="submit-icon" class="fas fa-paper-plane text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+  FOOTER
+================================================================ -->
+<footer class="border-t" style="background:#1c1917; border-color:#292524;">
+  <div class="max-w-screen-xl mx-auto px-5 sm:px-8 py-10">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-7">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-block w-[3px] h-6" style="background:#c2410c;"></span>
+        <div>
+          <div class="font-bebas text-lg tracking-[.15em]" style="color:#e7e5e4;">LOCAL GRID WORKS</div>
+          <div class="text-[10px] tracking-wider font-inter" style="color:#57534e;">株式会社LOCAL GRID WORKS</div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-x-7 gap-y-3">
+        <a href="#mission"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">MISSION</a>
+        <a href="#services" class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">SERVICES</a>
+        <a href="#company"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">COMPANY</a>
+        <a href="#journal"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">JOURNAL</a>
+        <a href="#contact"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">CONTACT</a>
+      </div>
+    </div>
+    <div class="mt-8 pt-7 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style="border-color:rgba(41,37,36,.6);">
+      <p class="text-xs font-inter" style="color:#44403c;">&copy; 2026 LOCAL GRID WORKS, Inc. All Rights Reserved. Shitara, Aichi, Japan.</p>
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:#c2410c;"></span>
+        <span class="text-[10px] tracking-[.3em] uppercase font-inter" style="color:#44403c;">Build The Grid.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ================================================================
+  SCRIPTS
+================================================================ -->
+<script>
+  /* Mobile nav */
+  const navToggle    = document.getElementById('nav-toggle');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const navIcon      = document.getElementById('nav-icon');
+
+  navToggle.addEventListener('click', () => {
+    const open = !mobileDrawer.classList.contains('hidden');
+    mobileDrawer.classList.toggle('hidden', open);
+    navIcon.className = open ? 'fas fa-bars text-lg' : 'fas fa-times text-lg';
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => {
+    l.addEventListener('click', () => {
+      mobileDrawer.classList.add('hidden');
+      navIcon.className = 'fas fa-bars text-lg';
+    });
+  });
+
+  /* Scroll fade-in */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  /* Contact form */
+  const form        = document.getElementById('contact-form');
+  const submitBtn   = document.getElementById('submit-btn');
+  const submitLabel = document.getElementById('submit-label');
+  const submitIcon  = document.getElementById('submit-icon');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.style.background = '#44403c';
+    submitLabel.textContent = 'MESSAGE SENT';
+    submitIcon.className = 'fas fa-check text-xs';
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.style.background = '#c2410c';
+      submitLabel.textContent = 'SEND MESSAGE';
+      submitIcon.className = 'fas fa-paper-plane text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300';
+      form.reset();
+    }, 3500);
+  });
+</script>
+</body>
+</html>
