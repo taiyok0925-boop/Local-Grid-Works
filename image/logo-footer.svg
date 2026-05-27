@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 256" fill="none">
+
+  <!-- LEFT MOUNTAIN — amber, 4 lines per side fanning from peak -->
+  <g stroke="#C48A25" stroke-width="2" stroke-linecap="round">
+    <line x1="70" y1="28" x2="16"  y2="128"/>
+    <line x1="70" y1="28" x2="31"  y2="128"/>
+    <line x1="70" y1="28" x2="46"  y2="128"/>
+    <line x1="70" y1="28" x2="61"  y2="128"/>
+    <line x1="70" y1="28" x2="79"  y2="128"/>
+    <line x1="70" y1="28" x2="94"  y2="128"/>
+    <line x1="70" y1="28" x2="109" y2="128"/>
+    <line x1="70" y1="28" x2="124" y2="128"/>
+  </g>
+
+  <!-- CENTER MOUNTAIN — teal, tallest, 4 lines per side -->
+  <g stroke="#2A9D9B" stroke-width="2" stroke-linecap="round">
+    <line x1="146" y1="6" x2="68"  y2="128"/>
+    <line x1="146" y1="6" x2="90"  y2="128"/>
+    <line x1="146" y1="6" x2="112" y2="128"/>
+    <line x1="146" y1="6" x2="134" y2="128"/>
+    <line x1="146" y1="6" x2="158" y2="128"/>
+    <line x1="146" y1="6" x2="180" y2="128"/>
+    <line x1="146" y1="6" x2="202" y2="128"/>
+    <line x1="146" y1="6" x2="224" y2="128"/>
+  </g>
+
+  <!-- RIGHT MOUNTAIN — red, 4 lines per side -->
+  <g stroke="#BE3030" stroke-width="2" stroke-linecap="round">
+    <line x1="216" y1="28" x2="148" y2="128"/>
+    <line x1="216" y1="28" x2="163" y2="128"/>
+    <line x1="216" y1="28" x2="178" y2="128"/>
+    <line x1="216" y1="28" x2="193" y2="128"/>
+    <line x1="216" y1="28" x2="231" y2="128"/>
+    <line x1="216" y1="28" x2="246" y2="128"/>
+    <line x1="216" y1="28" x2="261" y2="128"/>
+    <line x1="216" y1="28" x2="276" y2="128"/>
+  </g>
+
+  <!-- TEXT -->
+  <text x="146" y="176"
+        text-anchor="middle"
+        font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+        font-weight="900" font-size="44" fill="#ffffff">LOCAL</text>
+
+  <text x="146" y="208"
+        text-anchor="middle"
+        font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+        font-weight="700" font-size="32" fill="#ffffff">GRID</text>
+
+  <text x="146" y="240"
+        text-anchor="middle"
+        font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+        font-weight="900" font-size="32" fill="#A84E2E">WORKS</text>
+
+</svg>

@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Public+Sans:wght@900&family=Shippori+Mincho+B1:wght@800&family=Noto+Sans+JP:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
 <script>
   tailwind.config = {
@@ -21,359 +21,377 @@
           noto:  ['"Noto Sans JP"', 'sans-serif'],
           inter: ['Inter', 'sans-serif'],
         },
-        colors: {
-          /* サイト全体で使うアースカラーパレット */
-          earth: {
-            950: '#100e0c',  /* 最も暗い — 岩の陰 */
-            900: '#1c1917',  /* stone-900 */
-            800: '#292524',  /* stone-800 */
-            700: '#44403c',  /* stone-700 */
-            600: '#57534e',  /* stone-600 */
-            400: '#a8a29e',  /* stone-400 */
-            200: '#e7e5e4',  /* stone-200 */
-            100: '#f5f5f4',  /* stone-100 */
-          },
-          clay: {
-            700: '#b45309',  /* amber-700 — 落ち着いたアクセント */
-            600: '#c2410c',  /* orange-700 — テラコッタ */
-            500: '#d97706',  /* amber-600 */
-            400: '#ea580c',  /* orange-600 — ホバー時に使う程度 */
-          }
-        }
       },
     },
   };
 </script>
 
 <style>
+  /* =====================================================
+     カラー変数  — クリーム × テラコッタ
+  ===================================================== */
+  :root {
+    --bg-light:    #f7f2e9;   /* メイン背景：温かいクリーム */
+    --bg-mid:      #ede8dd;   /* セクション交互：少し濃いクリーム */
+    --bg-card:     #e5dfd3;   /* テーブルヘッダ・カード */
+    --border:      #d4cdc0;   /* ボーダー */
+    --border-dim:  #c4bdb0;   /* 濃いボーダー */
+    --text-main:   #1c1917;   /* メインテキスト */
+    --text-body:   #44403c;   /* 本文 */
+    --text-muted:  #78716c;   /* ミュート */
+    --text-dim:    #a8a29e;   /* 薄い */
+    --accent:      #16a34a;   /* レイクサイド・グリーン */
+    --accent-dark: #15803d;   /* ホバー用 */
+    --num-color:   #d4cdc0;   /* 装飾的な大きな番号 */
+  }
+
   body {
     font-family: 'Inter','Noto Sans JP',sans-serif;
-    background-color: #100e0c;
-    color: #e7e5e4;
+    background-color: var(--bg-light);
+    color: var(--text-main);
   }
   html { scroll-behavior: smooth; }
 
   ::-webkit-scrollbar       { width: 5px; }
-  ::-webkit-scrollbar-track { background: #100e0c; }
-  ::-webkit-scrollbar-thumb { background: #c2410c; border-radius: 2px; }
+  ::-webkit-scrollbar-track { background: var(--bg-light); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
+  /* ナビ下線 */
   .nav-link { position: relative; }
   .nav-link::after {
-    content:''; position:absolute; bottom:-4px; left:0;
-    width:0; height:2px; background:#c2410c;
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: var(--accent);
     transition: width .3s ease;
   }
-  .nav-link:hover::after { width:100%; }
+  .nav-link:hover::after { width: 100%; }
 
+  /* フォーム入力 */
   .form-input {
-    display:block; width:100%;
-    background:#1c1917; border:1px solid #44403c;
-    color:#e7e5e4; outline:none;
-    transition:border-color .3s ease, box-shadow .3s ease;
-    -webkit-appearance:none;
+    display: block; width: 100%;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-main); outline: none;
+    transition: border-color .3s ease, box-shadow .3s ease;
+    -webkit-appearance: none;
   }
-  .form-input::placeholder { color:#57534e; }
+  .form-input::placeholder { color: var(--text-dim); }
   .form-input:focus {
-    border-color:#c2410c;
-    box-shadow:0 0 0 3px rgba(194,65,12,.15);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(22,163,74,.12);
   }
 
-  .fade-in { opacity:0; transform:translateY(24px); transition:opacity .85s ease, transform .85s ease; }
-  .fade-in.visible { opacity:1; transform:translateY(0); }
-
-  /* サービス横並びリスト */
-  .service-row {
-    border-top: 1px solid #292524;
-    transition: background-color .25s ease;
+  /* Ken Burns */
+  @keyframes kenburns {
+    0%   { transform: scale(1)    translate(0, 0); }
+    50%  { transform: scale(1.08) translate(-1.5%, -1%); }
+    100% { transform: scale(1.04) translate(1%, .5%); }
   }
-  .service-row:last-child { border-bottom: 1px solid #292524; }
-  .service-row:hover { background-color: rgba(194,65,12,.05); }
+  .hero-kenburns {
+    animation: kenburns 18s ease-in-out infinite alternate;
+    transform-origin: center center;
+  }
+
+  /* フェードイン */
+  .fade-in { opacity: 0; transition: opacity .85s ease; }
+  .fade-in.visible { opacity: 1; }
+
+  /* サービス横並び */
+  .service-row { border-top: 1px solid var(--border); transition: background-color .25s ease; }
+  .service-row:last-child { border-bottom: 1px solid var(--border); }
+  .service-row:hover { background-color: rgba(22,163,74,.04); }
 
   /* パートナーカード */
-  .partner-card { border:1px solid #292524; transition:border-color .3s ease, background-color .3s ease; }
-  .partner-card:hover { border-color:#c2410c; background-color:rgba(194,65,12,.05); }
+  .partner-card { border: 1px solid var(--border); border-radius: 2px; transition: border-color .3s ease, background-color .3s ease; }
+  .partner-card:hover { border-color: var(--accent); background-color: rgba(22,163,74,.04); }
 
   /* 会社概要テーブル */
-  .profile-row { transition:background-color .2s ease; }
-  .profile-row:hover { background-color:rgba(194,65,12,.05); }
+  .profile-row { transition: background-color .2s ease; }
+  .profile-row:hover { background-color: rgba(22,163,74,.04); }
+
+  /* フッターナビリンク アンダーライン */
+  .footer-nav-link { position: relative; }
+  .footer-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(247,242,233,.7);
+    transition: width .3s ease;
+  }
+  .footer-nav-link:hover { color: rgba(247,242,233,.9) !important; }
+  .footer-nav-link:hover::after { width: 100%; }
 
   /* プルクオート */
-  .pull-quote { border-left: 3px solid #c2410c; }
+  .pull-quote { border-left: 3px solid var(--accent); }
+
+  /* ジャーナル行 */
+  .journal-row { border-top: 1px solid var(--border); transition: background-color .25s ease; }
+  .journal-row:hover { background-color: rgba(22,163,74,.04); }
 
   /* テキストはみ出し防止 */
   .clip-text { overflow: hidden; }
 
-  /* ジャーナル */
-  .journal-row { border-top: 1px solid #292524; }
-  .journal-row:hover { background-color: rgba(194,65,12,.04); }
-
-  /* アクセントカラー変数（CSS） */
-  :root {
-    --accent:     #c2410c;
-    --accent-dim: rgba(194,65,12,.12);
-    --bg-dark:    #100e0c;
-    --bg-mid:     #1c1917;
-    --bg-card:    #211f1d;
-    --border:     #292524;
-    --border-dim: #3a3633;
-    --text-main:  #e7e5e4;
-    --text-muted: #a8a29e;
-    --text-dim:   #57534e;
-  }
+  /* ヒーロー文字シャドウ */
+  .hero-shadow { text-shadow: 0 2px 20px rgba(0,0,0,.6); }
 </style>
 </head>
+
 <body>
 
+<!-- ================================================================
+  TOPOGRAPHIC BACKGROUND  —  固定背景・最背面
+================================================================ -->
+<div aria-hidden="true"
+     style="position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; mix-blend-mode:multiply;">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 1440 1080"
+       preserveAspectRatio="xMidYMid slice"
+       width="100%" height="100%">
+    <g fill="none" stroke="#44403c" stroke-width="1" opacity="0.11">
+
+      <!-- === 左上丘陵クラスター === -->
+      <path d="M 310,155 C 355,88 445,65 515,98 C 585,131 602,218 568,278 C 534,338 458,362 382,338 C 306,314 258,244 272,182 C 280,152 305,158 310,155 Z"/>
+      <path d="M 265,82 C 342,5 488,-18 585,42 C 682,102 706,232 660,330 C 614,428 502,468 394,430 C 286,392 222,296 238,198 C 250,122 262,98 265,82 Z"/>
+      <path d="M 210,8 C 312,-80 518,-102 650,-20 C 782,62 818,238 762,372 C 706,506 574,555 434,510 C 294,465 212,352 218,228 C 222,130 208,30 210,8 Z"/>
+      <path d="M 148,-62 C 278,-172 535,-192 700,-88 C 865,16 912,252 848,420 C 784,588 634,644 476,592 C 318,540 218,408 224,268 C 228,148 145,8 148,-62 Z"/>
+
+      <!-- === 右下丘陵クラスター === -->
+      <path d="M 1112,718 C 1158,652 1242,640 1295,682 C 1348,724 1355,808 1312,858 C 1269,908 1185,918 1124,874 C 1063,830 1048,760 1112,718 Z"/>
+      <path d="M 1058,648 C 1125,560 1270,542 1356,602 C 1442,662 1458,784 1404,866 C 1350,948 1222,972 1115,918 C 1008,864 982,768 1058,648 Z"/>
+      <path d="M 996,574 C 1082,468 1292,450 1406,530 C 1520,610 1542,775 1468,888 C 1394,1001 1238,1038 1102,974 C 966,910 942,756 996,574 Z"/>
+      <path d="M 940,500 C 1045,375 1316,358 1455,458 C 1594,558 1618,768 1532,908 C 1446,1048 1258,1092 1094,1018 C 930,944 892,738 940,500 Z"/>
+
+      <!-- === 中央を流れる尾根ライン群 === -->
+      <path d="M -60,558 C 95,514 202,488 358,500 C 514,512 618,550 778,538 C 938,526 1042,484 1198,472 C 1354,460 1418,482 1510,465"/>
+      <path d="M -60,488 C 84,442 195,414 352,428 C 509,442 615,482 778,468 C 941,454 1048,408 1206,394 C 1364,380 1426,404 1510,388"/>
+      <path d="M -60,418 C 105,370 215,340 374,356 C 533,372 638,414 804,398 C 970,382 1080,332 1240,318 C 1400,304 1432,328 1510,312"/>
+      <path d="M -60,352 C 112,302 228,270 390,288 C 552,306 658,350 826,332 C 994,314 1106,260 1268,246 C 1430,232 1440,258 1510,242"/>
+
+      <!-- === 対角地形ライン（広域地形の流れ） === -->
+      <path d="M -60,895 C 55,828 162,780 322,768 C 482,756 584,798 748,782 C 912,766 1018,714 1178,702 C 1338,690 1422,720 1510,705"/>
+      <path d="M -60,965 C 62,892 175,840 340,826 C 505,812 610,856 778,838 C 946,820 1058,764 1224,752 C 1390,740 1428,772 1510,758"/>
+      <path d="M -60,195 C 98,152 255,128 414,148 C 573,168 672,212 832,196 C 992,180 1095,134 1255,120 C 1415,106 1432,130 1510,118"/>
+      <path d="M -60,265 C 92,220 248,194 408,215 C 568,236 668,280 830,263 C 992,246 1098,196 1258,182 C 1418,168 1434,193 1510,180"/>
+
+      <!-- === 縦方向の谷筋ライン === -->
+      <path d="M 608,-60 C 585,88 568,175 598,305 C 628,435 692,492 668,625 C 644,758 578,818 598,948 C 618,1078 658,1138 645,1200"/>
+      <path d="M 695,-60 C 668,95 645,188 678,322 C 711,456 775,515 749,652 C 723,789 652,852 672,985 C 692,1118 736,1178 722,1250"/>
+      <path d="M 835,-60 C 812,88 792,175 822,302 C 852,429 908,482 884,612 C 860,742 792,798 812,928 C 832,1058 872,1118 858,1200"/>
+
+      <!-- === 中域の小クラスター（地形のバリエーション） === -->
+      <path d="M 762,162 C 802,118 875,112 918,150 C 961,188 962,262 920,298 C 878,334 805,332 764,294 C 723,256 718,198 762,162 Z"/>
+      <path d="M 728,118 C 782,55 902,48 962,104 C 1022,160 1018,268 964,322 C 910,376 798,378 740,322 C 682,266 675,172 728,118 Z"/>
+      <path d="M 695,75 C 762,-5 918,-14 1002,58 C 1086,130 1080,278 1012,342 C 944,406 790,410 720,348 C 650,286 635,152 695,75 Z"/>
+
+      <!-- === 左下の小クラスター === -->
+      <path d="M 195,812 C 238,762 315,756 362,794 C 409,832 415,912 372,954 C 329,996 252,998 208,959 C 164,920 155,854 195,812 Z"/>
+      <path d="M 158,765 C 214,698 340,690 402,742 C 464,794 472,900 418,960 C 364,1020 248,1025 188,972 C 128,919 115,825 158,765 Z"/>
+      <path d="M 118,718 C 190,638 358,628 435,690 C 512,752 522,890 458,962 C 394,1034 248,1040 172,982 C 96,924 58,798 118,718 Z"/>
+
+    </g>
+  </svg>
+</div>
 
 <!-- ================================================================
-  NAVIGATION
+  NAVIGATION  —  クリーム背景
 ================================================================ -->
-<nav class="fixed inset-x-0 top-0 z-50 h-14 backdrop-blur-md border-b"
-     style="background:rgba(16,14,12,.95); border-color:#292524;">
-  <div class="max-w-screen-xl mx-auto h-full px-5 sm:px-8 flex items-center justify-between">
+<nav style="position:fixed; inset:0 0 auto 0; z-index:50; height:56px;
+            background:rgba(247,242,233,.96); backdrop-filter:blur(12px);
+            border-bottom:1px solid var(--border);">
+  <div style="max-width:1280px; margin:0 auto; height:100%;
+              padding:0 1.25rem; display:flex; align-items:center; justify-content:space-between;">
 
-    <a href="#hero" class="flex items-center gap-2 shrink-0">
-      <span class="inline-block w-[3px] h-5" style="background:#c2410c;"></span>
-      <span class="font-bebas text-base sm:text-lg tracking-[.18em]" style="color:#e7e5e4;">LOCAL GRID WORKS</span>
+    <a href="#hero" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+      <img src="image/logo.svg" alt="LOCAL GRID WORKS" style="height:36px; width:auto; object-fit:contain;">
+      <span style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.18em; color:var(--text-main);">LOCAL GRID WORKS</span>
     </a>
 
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#mission"  class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">MISSION</a>
-      <a href="#services" class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">SERVICES</a>
-      <a href="#company"  class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">COMPANY</a>
-      <a href="#journal"  class="nav-link text-[10px] font-bold tracking-[.25em] uppercase transition-colors duration-200" style="color:#a8a29e;" onmouseover="this.style.color='#ea580c'" onmouseout="this.style.color='#a8a29e'">JOURNAL</a>
+    <div class="hidden md:flex" style="align-items:center; gap:2rem;">
+      <a href="#mission"  class="nav-link" style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); text-decoration:none;">MISSION</a>
+      <a href="#services" class="nav-link" style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); text-decoration:none;">SERVICES</a>
+      <a href="#journal"  class="nav-link" style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); text-decoration:none;">JOURNAL</a>
       <a href="#contact"
-         class="text-[10px] font-bold tracking-[.25em] uppercase px-5 py-2 transition-colors duration-200"
-         style="background:#c2410c; color:#f5f5f4;"
-         onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#c2410c'">CONTACT</a>
+         style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase;
+                padding:8px 20px; background:var(--accent); color:#fff; text-decoration:none;
+                border-radius:4px; transition:background .2s ease;"
+         onmouseover="this.style.background='var(--accent-dark)'" onmouseout="this.style.background='var(--accent)'">CONTACT</a>
     </div>
 
-    <button id="nav-toggle" class="md:hidden transition-colors" style="color:#a8a29e;" aria-label="menu">
-      <i id="nav-icon" class="fas fa-bars text-lg"></i>
+    <button id="nav-toggle" class="md:hidden" style="background:none; border:none; cursor:pointer; color:var(--text-muted);">
+      <i id="nav-icon" class="fas fa-bars" style="font-size:1.1rem;"></i>
     </button>
   </div>
 
-  <div id="mobile-drawer" class="hidden md:hidden border-t" style="background:#1c1917; border-color:#292524;">
-    <div class="px-5 py-6 flex flex-col gap-1">
-      <a href="#mission"  class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">MISSION</a>
-      <a href="#services" class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">SERVICES</a>
-      <a href="#company"  class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">COMPANY</a>
-      <a href="#journal"  class="mobile-link text-[11px] font-bold tracking-[.25em] uppercase py-3 border-b transition-colors" style="color:#a8a29e; border-color:#292524;">JOURNAL</a>
-      <a href="#contact"  class="mobile-link mt-4 block text-[11px] font-bold tracking-[.25em] uppercase px-5 py-3 text-center transition-colors" style="background:#c2410c; color:#f5f5f4;">CONTACT</a>
+  <!-- モバイルドロワー -->
+  <div id="mobile-drawer" class="hidden md:hidden"
+       style="background:var(--bg-light); border-top:1px solid var(--border);">
+    <div style="padding:1.5rem 1.25rem; display:flex; flex-direction:column; gap:4px;">
+      <a href="#mission"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">MISSION</a>
+      <a href="#services" class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">SERVICES</a>
+      <a href="#journal"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">JOURNAL</a>
+      <a href="#contact"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; margin-top:12px; display:block; text-align:center; padding:12px; background:var(--accent); color:#fff; text-decoration:none; border-radius:4px;">CONTACT</a>
     </div>
   </div>
 </nav>
 
 
 <!-- ================================================================
-  HERO
+  HERO  —  写真セクションのみ暗いまま
 ================================================================ -->
-<section id="hero" class="relative w-full h-screen min-h-[640px] overflow-hidden">
-  <div class="absolute inset-0 z-0">
-    <img
-      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
-      alt="Mountain lake"
-      class="w-full h-full object-cover"
-    />
-    <!-- 冷たい青ではなく、温かみのある暗いオーバーレイ -->
-    <div class="absolute inset-0" style="background:rgba(16,14,12,.58);"></div>
-    <div class="absolute inset-x-0 bottom-0 h-80" style="background:linear-gradient(to top, #100e0c, transparent);"></div>
+<section id="hero" style="position:relative; z-index:2; width:100%; height:100vh; min-height:640px; overflow:hidden;">
+  <div style="position:absolute; inset:0; z-index:0;">
+    <img src="image/DAM _image"
+         alt="設楽ダム"
+         class="hero-kenburns"
+         style="width:100%; height:100%; object-fit:cover;" />
+    <div style="position:absolute; inset:0; background:rgba(16,14,12,.55);"></div>
+    <div style="position:absolute; bottom:0; left:0; right:0; height:200px;
+                background:linear-gradient(to bottom, transparent, var(--bg-light));"></div>
   </div>
 
-  <div class="absolute bottom-16 left-0 z-10 px-5 sm:px-10 lg:px-16 max-w-3xl">
-    <p class="text-[10px] font-bold tracking-[.4em] uppercase font-inter mb-6" style="color:#c2410c;">
+  <div style="position:absolute; bottom:4rem; left:0; z-index:10;
+              padding:0 1.25rem; max-width:56rem;"
+       class="sm:px-10 lg:px-16">
+    <p class="hero-shadow" style="font-size:10px; font-weight:700; letter-spacing:.4em; text-transform:uppercase; color:var(--accent); margin-bottom:1.5rem;">
       Est. 2026 — Shitara, Aichi, Japan
     </p>
     <div class="clip-text">
-      <h1 class="font-noto font-black text-[clamp(3.5rem,10vw,8rem)] leading-[1] tracking-tight mb-1" style="color:#e7e5e4;">
+      <h1 class="hero-shadow" style="font-family:'Public Sans',sans-serif; font-weight:900;
+                 font-size:clamp(2.6rem,8vw,6.4rem); color:#f7f2e9; line-height:1.05; letter-spacing:.02em; margin-bottom:4px;">
         設楽を最高の
       </h1>
     </div>
     <div class="clip-text">
-      <h1 class="font-noto font-black text-[clamp(3.5rem,10vw,8rem)] leading-[1] tracking-tight mb-8" style="color:#c2410c;">
+      <h1 class="hero-shadow" style="font-family:'Public Sans',sans-serif; font-weight:900;
+                 font-size:clamp(2.6rem,8vw,6.4rem); color:var(--accent); line-height:1.05; letter-spacing:.02em; margin-bottom:2rem;">
         遊び場へ。
       </h1>
     </div>
-    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-      <a href="#contact"
-         class="inline-flex items-center gap-3 font-inter font-bold text-[11px] tracking-[.2em] uppercase px-8 py-3.5 transition-all duration-300 group"
-         style="background:#c2410c; color:#f5f5f4;"
-         onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#c2410c'">
-        <span>EXPLORE THE GRID</span>
-        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform duration-300"></i>
-      </a>
-      <p class="font-bebas text-base sm:text-xl tracking-[.25em] uppercase" style="color:#78716c;">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:1.25rem;">
+<p class="hero-shadow" style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem;
+                letter-spacing:.25em; color:rgba(247,242,233,.6); text-transform:uppercase;">
         THE ULTIMATE PLAYGROUND GRID.
       </p>
     </div>
   </div>
 
-  <div class="absolute bottom-12 right-8 z-10 flex flex-col items-center gap-2">
-    <div class="w-px h-12" style="background:linear-gradient(to bottom, #78716c, transparent);"></div>
-    <span class="text-[9px] tracking-[.3em] uppercase" style="color:#57534e; writing-mode:vertical-rl;">Scroll</span>
+  <div style="position:absolute; bottom:3rem; right:2rem; z-index:10;
+              display:flex; flex-direction:column; align-items:center; gap:8px;">
+    <div style="width:1px; height:48px; background:linear-gradient(to bottom, rgba(247,242,233,.4), transparent);"></div>
+    <span style="font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:rgba(247,242,233,.3);
+                 writing-mode:vertical-rl;">Scroll</span>
   </div>
 </section>
 
 
 <!-- ================================================================
-  01. MISSION
+  01. MISSION  —  bg: var(--bg-light)
 ================================================================ -->
-<section id="mission" class="pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden" style="background:#100e0c;">
+<section id="mission" style="padding-top:5rem; background:var(--bg-light); overflow:hidden;">
   <div class="fade-in">
 
-    <div class="px-5 sm:px-10 lg:px-16 mb-3">
-      <p class="text-[10px] font-bold tracking-[.35em] uppercase font-inter mb-4" style="color:#c2410c;">01. MISSION / CONCEPT</p>
-    </div>
-    <div class="px-5 sm:px-10 lg:px-16 clip-text">
-      <h2 class="font-bebas tracking-wide leading-[.9] uppercase whitespace-nowrap" style="font-size:clamp(4rem,13vw,11rem); color:#e7e5e4;">
-        BUILD THE GRID.
-      </h2>
-    </div>
-    <div class="px-5 sm:px-10 lg:px-16 clip-text mb-16">
-      <h2 class="font-bebas tracking-wide leading-[.9] uppercase whitespace-nowrap" style="font-size:clamp(4rem,13vw,11rem); color:#c2410c;">
-        UNLOCK THE FIELD.
-      </h2>
+    <!-- セクションラベル -->
+    <div class="px-5 sm:px-10 lg:px-16" style="margin-bottom:2.5rem;">
+      <div style="display:flex; align-items:baseline; gap:1rem;">
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">01.</span>
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">MISSION / CONCEPT</span>
+      </div>
     </div>
 
-    <div class="px-5 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+    <!-- 左:画像 / 右:テキスト  2カラム分割 -->
+    <div style="display:flex; flex-wrap:wrap; align-items:stretch;">
 
-      <div class="lg:col-span-4 lg:pt-2">
-        <div class="pull-quote pl-5">
-          <p class="text-lg sm:text-xl font-semibold font-noto leading-relaxed" style="color:#d6d3d1;">
+      <!-- ========== 左カラム：画像エリア ==========
+           画像を追加するには：
+             1. 下の <img> タグの src に画像パスを入れる
+             2. <img> タグの style から "display:none" を削除する
+             3. プレースホルダー <div id="mission-img-placeholder"> を削除する
+      ================================================ -->
+      <div style="flex:0 0 50%; min-width:280px; position:relative; z-index:2; min-height:540px; background:var(--bg-card);">
+
+        <img id="mission-img"
+             src="image/dam_image_mission2_resized.avif"
+             alt="設楽ダム湖"
+             style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;" />
+      </div>
+
+      <!-- ========== 右カラム：テキスト ========== -->
+      <div style="flex:1; min-width:300px; padding:4rem 3.5rem 5rem;
+                  display:flex; flex-direction:column; justify-content:center;">
+
+        <div class="clip-text" style="margin-bottom:2rem;">
+          <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,6rem);
+                     letter-spacing:.04em; line-height:.92; text-transform:uppercase; color:var(--text-main);">
+            BUILD THE GRID.
+          </h2>
+          <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,6rem);
+                     letter-spacing:.04em; line-height:.92; text-transform:uppercase; color:var(--accent);">
+            UNLOCK THE FIELD.
+          </h2>
+        </div>
+
+        <div class="pull-quote" style="padding-left:1.25rem; margin-bottom:1.5rem;">
+          <p style="font-family:'Noto Sans JP',sans-serif; font-size:1.05rem; font-weight:700;
+                    color:var(--text-main); line-height:1.85;">
             近い将来ダム湖が完成する設楽。「遊べるダム湖」の実現に向けて。
           </p>
         </div>
-      </div>
 
-      <div class="lg:col-span-5 lg:col-start-7">
-        <p class="text-sm leading-relaxed font-noto mb-6" style="color:#a8a29e;">
-          私たちは、ダム湖という地域資源を『ただ眺めるもの』から『誰もが楽しめるフィールド』へとアップデートしたいと考えて活動しています。
+        <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);
+                  line-height:2; margin-bottom:1.25rem;">
+          私たちは、ダム湖という地域資源を「ただ眺めるもの」から「誰もが楽しめるフィールド」へとアップデートしたいと考えて活動しています。
         </p>
-        <p class="text-sm leading-relaxed font-noto mb-10" style="color:#a8a29e;">
+        <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);
+                  line-height:2; margin-bottom:2.5rem;">
           公共空間・人・自然・アクティビティをグリッド（網の目）のように繋ぎ合わせ、新しい地域の価値を創造します。
         </p>
-        <div class="flex gap-8">
-          <div>
-            <div class="font-bebas text-xl tracking-widest" style="color:#c2410c;">CONNECT</div>
-            <div class="text-[10px] mt-0.5 font-noto" style="color:#57534e;">人・地域・自然</div>
-          </div>
-          <div>
-            <div class="font-bebas text-xl tracking-widest" style="color:#c2410c;">CREATE</div>
-            <div class="text-[10px] mt-0.5 font-noto" style="color:#57534e;">新しい価値</div>
-          </div>
-          <div>
-            <div class="font-bebas text-xl tracking-widest" style="color:#c2410c;">SUSTAIN</div>
-            <div class="text-[10px] mt-0.5 font-noto" style="color:#57534e;">持続可能な場</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
+        <div style="display:flex; flex-wrap:wrap; gap:1.75rem;">
 
-<!-- ================================================================
-  02. SERVICES
-================================================================ -->
-<section id="services" class="py-24 sm:py-32" style="background:#1c1917;">
-  <div class="max-w-screen-xl mx-auto px-5 sm:px-10 lg:px-16">
-    <div class="fade-in">
-
-      <div class="flex items-baseline gap-4 mb-14">
-        <span class="font-bebas text-5xl leading-none" style="color:#c2410c;">02.</span>
-        <span class="text-[10px] font-bold tracking-[.3em] uppercase font-inter" style="color:#57534e;">SERVICES & FIELD OPERATIONS</span>
-      </div>
-
-      <!-- 01 -->
-      <div class="service-row group py-8 sm:py-10 px-2 sm:px-4">
-        <div class="grid grid-cols-12 gap-4 items-start">
-          <div class="col-span-1">
-            <span class="font-bebas text-5xl sm:text-7xl leading-none transition-colors duration-300 group-hover:opacity-40" style="color:#3a3633;">01</span>
-          </div>
-          <div class="col-span-11 sm:col-span-4 sm:col-start-2 pt-1">
-            <div class="flex items-center gap-3 mb-1">
-              <i class="fas fa-water text-xs" style="color:#c2410c;"></i>
-              <span class="text-[10px] font-bold tracking-[.25em] uppercase font-inter" style="color:#c2410c;">LAKEFRONT PRODUCTION</span>
+          <!-- CONNECT -->
+          <div style="flex:1; min-width:150px;">
+            <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;">
+              <div style="width:42px; height:42px; flex-shrink:0; background:var(--accent); border-radius:2px;
+                          display:flex; align-items:center; justify-content:center;">
+                <i class="fas fa-network-wired" style="font-size:15px; color:#fff;"></i>
+              </div>
+              <span style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.15em; color:var(--text-main);">CONNECT</span>
             </div>
-            <h3 class="font-noto font-black text-xl sm:text-2xl leading-snug" style="color:#e7e5e4;">ダム湖活用プロデュース</h3>
-          </div>
-          <div class="col-span-12 sm:col-span-6 sm:col-start-7 pl-0 sm:pl-4 pt-0 sm:pt-1">
-            <p class="text-sm leading-relaxed font-noto" style="color:#a8a29e;">
-              水面利用のアクティビティ企画・運営。ただの観光地ではない、ダイナミックな水辺のエンターテインメントを創造。
+            <p style="font-family:'Noto Sans JP',sans-serif; font-size:.8rem; color:var(--text-muted); line-height:1.9;">
+              設楽の自然、行政、そしてプレイヤー。点在する地域のポテンシャルを強固な「グリッド」として直結させ、誰もがアクセスできる確かなネットワークを築きます。
             </p>
           </div>
-        </div>
-      </div>
 
-      <!-- 02 -->
-      <div class="service-row group py-8 sm:py-10 px-2 sm:px-4">
-        <div class="grid grid-cols-12 gap-4 items-start">
-          <div class="col-span-1">
-            <span class="font-bebas text-5xl sm:text-7xl leading-none transition-colors duration-300 group-hover:opacity-40" style="color:#3a3633;">02</span>
-          </div>
-          <div class="col-span-11 sm:col-span-4 sm:col-start-2 pt-1">
-            <div class="flex items-center gap-3 mb-1">
-              <i class="fas fa-network-wired text-xs" style="color:#c2410c;"></i>
-              <span class="text-[10px] font-bold tracking-[.25em] uppercase font-inter" style="color:#c2410c;">COMMUNITY GRID</span>
+          <!-- CREATE -->
+          <div style="flex:1; min-width:150px;">
+            <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;">
+              <div style="width:42px; height:42px; flex-shrink:0; background:var(--accent); border-radius:2px;
+                          display:flex; align-items:center; justify-content:center;">
+                <i class="fas fa-hammer" style="font-size:15px; color:#fff;"></i>
+              </div>
+              <span style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.15em; color:var(--text-main);">CREATE</span>
             </div>
-            <h3 class="font-noto font-black text-xl sm:text-2xl leading-snug" style="color:#e7e5e4;">地域連携支援</h3>
-          </div>
-          <div class="col-span-12 sm:col-span-6 sm:col-start-7 pl-0 sm:pl-4 pt-0 sm:pt-1">
-            <p class="text-sm leading-relaxed font-noto" style="color:#a8a29e;">
-              ローカルネットワークを最大限に活かしたイベント・プロジェクトの運営。人と地域を網の目のように繋ぐ。
+            <p style="font-family:'Noto Sans JP',sans-serif; font-size:.8rem; color:var(--text-muted); line-height:1.9;">
+              巨大なインフラを「ただ眺める場所」で終わらせない。圧倒的な熱量と現場力で、誰もが熱狂できるタフな遊び場（フィールド）をゼロから実装します。
             </p>
           </div>
-        </div>
-      </div>
 
-      <!-- 03 -->
-      <div class="service-row group py-8 sm:py-10 px-2 sm:px-4">
-        <div class="grid grid-cols-12 gap-4 items-start">
-          <div class="col-span-1">
-            <span class="font-bebas text-5xl sm:text-7xl leading-none transition-colors duration-300 group-hover:opacity-40" style="color:#3a3633;">03</span>
-          </div>
-          <div class="col-span-11 sm:col-span-4 sm:col-start-2 pt-1">
-            <div class="flex items-center gap-3 mb-1">
-              <i class="fas fa-hammer text-xs" style="color:#c2410c;"></i>
-              <span class="text-[10px] font-bold tracking-[.25em] uppercase font-inter" style="color:#c2410c;">FIELD DEVELOPMENT</span>
+          <!-- SUSTAIN -->
+          <div style="flex:1; min-width:150px;">
+            <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;">
+              <div style="width:42px; height:42px; flex-shrink:0; background:var(--accent); border-radius:2px;
+                          display:flex; align-items:center; justify-content:center;">
+                <i class="fas fa-leaf" style="font-size:15px; color:#fff;"></i>
+              </div>
+              <span style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.15em; color:var(--text-main);">SUSTAIN</span>
             </div>
-            <h3 class="font-noto font-black text-xl sm:text-2xl leading-snug" style="color:#e7e5e4;">アウトドア・フィールド開発</h3>
-          </div>
-          <div class="col-span-12 sm:col-span-6 sm:col-start-7 pl-0 sm:pl-4 pt-0 sm:pt-1">
-            <p class="text-sm leading-relaxed font-noto" style="color:#a8a29e;">
-              遊びを豊かにするインフラや拠点の整備。自然を切り拓き、タフで持続可能なフィールドを構築。
+            <p style="font-family:'Noto Sans JP',sans-serif; font-size:.8rem; color:var(--text-muted); line-height:1.9;">
+              一過性のイベントではなく、自然環境と共存しながら次世代へと受け継がれる、持続可能で強靭なエコシステムをこの地に根付かせます。
             </p>
           </div>
-        </div>
-      </div>
 
-      <!-- EXPLORE SHITARA バナー -->
-      <div class="mt-14 relative overflow-hidden border transition-all duration-500 group cursor-pointer"
-           style="border-color:#3a3633; background:#211f1d;"
-           onmouseover="this.style.borderColor='#c2410c'" onmouseout="this.style.borderColor='#3a3633'">
-        <div class="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80"
-            alt="Shitara terrain"
-            class="w-full h-full object-cover opacity-[.12] group-hover:opacity-[.2] group-hover:scale-[1.03] transition-all duration-700"
-          />
-          <div class="absolute inset-0" style="background:linear-gradient(to right, rgba(33,31,29,.95), transparent);"></div>
-        </div>
-        <div class="relative z-10 p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-7">
-          <div>
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-[9px] font-bold tracking-[.3em] uppercase px-3 py-1 font-inter" style="background:#c2410c; color:#f5f5f4;">COMING SOON</span>
-              <span class="text-[9px] tracking-[.2em] uppercase font-inter" style="color:#57534e;">/ FIELD GUIDE</span>
-            </div>
-            <h3 class="font-bebas text-4xl sm:text-5xl tracking-wide uppercase mb-2" style="color:#e7e5e4;">EXPLORE SHITARA</h3>
-            <p class="text-sm font-noto max-w-xs" style="color:#78716c;">設楽のフィールド・地形・将来施設の全てを収録した完全フィールドガイド。近日公開。</p>
-          </div>
-          <div class="shrink-0 flex items-center gap-3 border px-6 py-4 transition-all duration-300"
-               style="border-color:#44403c;"
-               onmouseover="this.style.borderColor='#c2410c'" onmouseout="this.style.borderColor='#44403c'">
-            <span class="font-bebas text-lg tracking-widest uppercase transition-colors duration-300" style="color:#a8a29e;">VIEW THE TERRAIN</span>
-            <i class="fas fa-mountain text-sm transition-colors duration-300" style="color:#57534e;"></i>
-          </div>
         </div>
       </div>
 
@@ -383,228 +401,299 @@
 
 
 <!-- ================================================================
-  03. COMPANY PROFILE
+  02. SERVICES  —  bg: var(--bg-mid)
 ================================================================ -->
-<section id="company" class="pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden" style="background:#100e0c;">
+<section id="services" style="background:var(--bg-mid); overflow:hidden;">
   <div class="fade-in">
 
-    <div class="px-5 sm:px-10 lg:px-16 mb-3">
-      <p class="text-[10px] font-bold tracking-[.35em] uppercase font-inter mb-4" style="color:#c2410c;">03. COMPANY PROFILE</p>
-    </div>
-    <div class="px-5 sm:px-10 lg:px-16 clip-text mb-16">
-      <h2 class="font-bebas tracking-wide leading-[.95] uppercase" style="font-size:clamp(2.8rem,8.5vw,7.5rem); color:#e7e5e4;">
-        LOCAL GRID WORKS,<br/><span style="color:#3a3633;">Inc.</span>
-      </h2>
-    </div>
+    <!-- 左:タブUI / 右:画像  2カラム分割 -->
+    <div class="border-t border-b border-stone-900" style="display:flex; flex-wrap:wrap; align-items:stretch;">
 
-    <div class="px-5 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+      <!-- ========== 左カラム：タブ＋コンテンツ ========== -->
+      <div style="flex:1; min-width:300px; padding:5rem 3.5rem 5rem 5rem;">
 
-      <div class="lg:col-span-3">
-        <p class="text-sm leading-relaxed font-noto mb-8" style="color:#78716c;">
-          2026年5月、愛知県設楽町に設立。ダム湖完成に向けた地域の変革期に、アウトドアフィールドの可能性を最大化するために集結。
-        </p>
-        <!-- ピクセルグリッド装飾 -->
-        <div class="inline-grid grid-cols-5 gap-[3px] opacity-50">
-          <div class="w-4 h-4" style="background:#c2410c;"></div>   <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:rgba(194,65,12,.35);"></div>
-          <div class="w-4 h-4" style="background:#292524;"></div>   <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:rgba(194,65,12,.55);"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>
-          <div class="w-4 h-4" style="background:#3a3633;"></div>   <div class="w-4 h-4" style="background:rgba(194,65,12,.25);"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:rgba(194,65,12,.45);"></div>
-          <div class="w-4 h-4" style="background:rgba(194,65,12,.15);"></div>  <div class="w-4 h-4" style="background:#292524;"></div>  <div class="w-4 h-4" style="background:#3a3633;"></div>  <div class="w-4 h-4" style="background:#c2410c;"></div>  <div class="w-4 h-4" style="background:#292524;"></div>
+        <!-- セクションヘッダー -->
+        <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2.5rem;">
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">02.</span>
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">SERVICES & FIELD OPERATIONS</span>
         </div>
+
+        <!-- タブボタン -->
+        <div style="display:flex; flex-wrap:wrap; border-bottom:2px solid var(--border); margin-bottom:2.5rem;">
+
+          <button class="svc-tab svc-tab-active" data-target="svc-01"
+                  style="display:flex; align-items:center; gap:.5rem;
+                         padding:.75rem 1.5rem .75rem 0; margin-bottom:-2px;
+                         background:none; border:none; border-bottom:2px solid var(--accent);
+                         cursor:pointer; color:var(--accent);">
+            <i class="fas fa-water" style="font-size:12px;"></i>
+            <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">LAKEFRONT</span>
+          </button>
+
+          <button class="svc-tab" data-target="svc-02"
+                  style="display:flex; align-items:center; gap:.5rem;
+                         padding:.75rem 1.5rem; margin-bottom:-2px;
+                         background:none; border:none; border-bottom:2px solid transparent;
+                         cursor:pointer; color:var(--text-dim);">
+            <i class="fas fa-network-wired" style="font-size:12px;"></i>
+            <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">COMMUNITY</span>
+          </button>
+
+          <button class="svc-tab" data-target="svc-03"
+                  style="display:flex; align-items:center; gap:.5rem;
+                         padding:.75rem 1.5rem; margin-bottom:-2px;
+                         background:none; border:none; border-bottom:2px solid transparent;
+                         cursor:pointer; color:var(--text-dim);">
+            <i class="fas fa-hammer" style="font-size:12px;"></i>
+            <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">FIELD DEV</span>
+          </button>
+
+        </div>
+
+        <!-- パネル 01 -->
+        <div id="svc-01" class="svc-panel">
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,10vw,9rem);
+                       line-height:1; color:var(--num-color); display:block; margin-bottom:1rem;">01</span>
+          <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+            <i class="fas fa-water" style="font-size:12px; color:var(--accent);"></i>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">LAKEFRONT PRODUCTION</span>
+          </div>
+          <h3 style="font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:1.5rem;
+                     color:var(--text-main); margin-bottom:1.25rem;">ダム湖活用プロデュース</h3>
+          <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body); line-height:2;">
+            水面利用のアクティビティ企画・運営。ただの観光地ではない、ダイナミックな水辺のエンターテインメントを創造。
+          </p>
+        </div>
+
+        <!-- パネル 02 -->
+        <div id="svc-02" class="svc-panel" style="display:none;">
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,10vw,9rem);
+                       line-height:1; color:var(--num-color); display:block; margin-bottom:1rem;">02</span>
+          <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+            <i class="fas fa-network-wired" style="font-size:12px; color:var(--accent);"></i>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">COMMUNITY GRID</span>
+          </div>
+          <h3 style="font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:1.5rem;
+                     color:var(--text-main); margin-bottom:1.25rem;">地域連携支援</h3>
+          <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body); line-height:2;">
+            ローカルネットワークを最大限に活かしたイベント・プロジェクトの運営。人と地域を網の目のように繋ぐ。
+          </p>
+        </div>
+
+        <!-- パネル 03 -->
+        <div id="svc-03" class="svc-panel" style="display:none;">
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,10vw,9rem);
+                       line-height:1; color:var(--num-color); display:block; margin-bottom:1rem;">03</span>
+          <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+            <i class="fas fa-hammer" style="font-size:12px; color:var(--accent);"></i>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">FIELD DEVELOPMENT</span>
+          </div>
+          <h3 style="font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:1.5rem;
+                     color:var(--text-main); margin-bottom:1.25rem;">アウトドア・フィールド開発</h3>
+          <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body); line-height:2;">
+            遊びを豊かにするインフラや拠点の整備。自然を切り拓き、タフで持続可能なフィールドを構築。
+          </p>
+        </div>
+
       </div>
 
-      <div class="lg:col-span-8 lg:col-start-5 border overflow-hidden" style="border-color:#292524;">
-        <div class="profile-row flex border-b" style="border-color:#292524;">
-          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
-            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">商号</span>
-          </div>
-          <div class="px-5 py-4 flex items-center">
-            <span class="text-sm font-noto" style="color:#d6d3d1;">株式会社LOCAL GRID WORKS</span>
-          </div>
+      <!-- ========== 右カラム：タブ連動画像エリア ==========
+           各サービスの画像を追加するには：
+             svc-img-01 / 02 / 03 の <img> タグの
+             src に画像パスを入れ display:none を削除し
+             対応する placeholder div を削除してください
+      ================================================ -->
+      <div style="flex:0 0 48%; min-width:280px; position:relative; z-index:2; min-height:520px; background:var(--bg-card);">
+
+        <!-- 01 LAKEFRONT -->
+        <div id="svc-img-01" class="svc-img-slot"
+             style="position:absolute; inset:0; transition:opacity .4s ease;">
+          <img src="image/SUP_image.avif" alt="LAKEFRONT PRODUCTION"
+               style="width:100%; height:100%; object-fit:cover;" />
         </div>
-        <div class="profile-row flex border-b" style="border-color:#292524;">
-          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
-            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">設立</span>
-          </div>
-          <div class="px-5 py-4 flex items-center">
-            <span class="text-sm font-noto" style="color:#d6d3d1;">2026年5月</span>
-          </div>
-        </div>
-        <div class="profile-row flex border-b" style="border-color:#292524;">
-          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
-            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">代表取締役</span>
-          </div>
-          <div class="px-5 py-4 flex items-center">
-            <span class="text-sm font-noto" style="color:#d6d3d1;">近藤 友樹</span>
-          </div>
-        </div>
-        <div class="profile-row flex border-b" style="border-color:#292524;">
-          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
-            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">取締役</span>
-          </div>
-          <div class="px-5 py-4">
-            <div class="text-sm font-noto leading-[2.2]" style="color:#d6d3d1;">
-              麻野間 達也<br>安藤 豪規<br>小池 知宏
+
+        <!-- 02 COMMUNITY -->
+        <div id="svc-img-02" class="svc-img-slot"
+             style="position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .4s ease;">
+          <img src="" alt="COMMUNITY GRID"
+               style="width:100%; height:100%; object-fit:cover; display:none;" />
+          <div class="svc-img-placeholder"
+               style="position:absolute; inset:0; display:flex; flex-direction:column;
+                      align-items:center; justify-content:center; gap:1rem;
+                      border:2px dashed var(--border-dim);">
+            <i class="fas fa-network-wired" style="font-size:2rem; color:var(--border-dim);"></i>
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.2em; color:var(--text-dim);">COMMUNITY IMAGE</div>
+              <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">svc-img-02 の src を設定</div>
             </div>
           </div>
         </div>
-        <div class="profile-row flex border-b" style="border-color:#292524;">
-          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
-            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">所在地</span>
-          </div>
-          <div class="px-5 py-4 flex items-center">
-            <span class="text-sm font-noto" style="color:#d6d3d1;">愛知県北設楽郡設楽町</span>
+
+        <!-- 03 FIELD DEVELOPMENT -->
+        <div id="svc-img-03" class="svc-img-slot"
+             style="position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .4s ease;">
+          <img src="" alt="FIELD DEVELOPMENT"
+               style="width:100%; height:100%; object-fit:cover; display:none;" />
+          <div class="svc-img-placeholder"
+               style="position:absolute; inset:0; display:flex; flex-direction:column;
+                      align-items:center; justify-content:center; gap:1rem;
+                      border:2px dashed var(--border-dim);">
+            <i class="fas fa-hammer" style="font-size:2rem; color:var(--border-dim);"></i>
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.2em; color:var(--text-dim);">FIELD DEV IMAGE</div>
+              <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">svc-img-03 の src を設定</div>
+            </div>
           </div>
         </div>
-        <div class="profile-row flex">
-          <div class="w-32 sm:w-40 shrink-0 px-5 py-4 border-r" style="background:#1c1917; border-color:#292524;">
-            <span class="text-[10px] font-bold tracking-[.2em] uppercase font-inter" style="color:#57534e;">事業内容</span>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EXPLORE SHITARA バナー — .fade-in の外側に置くことで z-index:2 がルートで評価される -->
+  <div style="max-width:1280px; margin:0 auto; padding:3.5rem 1.25rem 5rem; position:relative; z-index:2; background:var(--bg-mid);" class="sm:px-10 lg:px-16">
+    <div style="position:relative; overflow:hidden;
+                border:1px solid var(--border); border-radius:2px; cursor:pointer;
+                transition:border-color .4s ease;"
+         onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="position:absolute; inset:0; z-index:0;">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80"
+             alt="Shitara terrain"
+             style="width:100%; height:100%; object-fit:cover; opacity:.32; transition:opacity .6s ease, transform .6s ease;"
+             onmouseover="this.style.opacity='.48'; this.style.transform='scale(1.03)'"
+             onmouseout="this.style.opacity='.32'; this.style.transform='scale(1)'" />
+        <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(237,232,221,.95), transparent);"></div>
+      </div>
+      <div style="position:relative; z-index:1; padding:3rem 3.5rem;
+                  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:2rem;">
+        <div>
+          <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:1rem;">
+            <span style="background:var(--accent); color:#fff; font-size:9px; font-weight:700; letter-spacing:.3em; text-transform:uppercase; padding:4px 12px; border-radius:2px;">COMING SOON</span>
+            <span style="font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">/ FIELD GUIDE</span>
           </div>
-          <div class="px-5 py-4">
-            <p class="text-sm font-noto leading-relaxed" style="color:#d6d3d1;">
-              地域活性化事業、指定管理者・アウトドア施設運営、イベント企画・制作・運営・備品のレンタル・運営・デザイン・コンサルティング事業
-            </p>
-          </div>
+          <h3 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,5vw,4rem);
+                     letter-spacing:.05em; text-transform:uppercase; color:var(--text-main); margin-bottom:.5rem;">
+            EXPLORE SHITARA
+          </h3>
+          <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-muted); max-width:22rem;">
+            設楽のフィールド・地形・将来施設の全てを収録した完全フィールドガイド。近日公開。
+          </p>
+        </div>
+        <div style="display:flex; align-items:center; gap:.75rem; border:1px solid var(--border);
+                    padding:1rem 1.75rem; border-radius:4px; transition:border-color .3s ease;"
+             onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.15em;
+                       text-transform:uppercase; color:var(--text-body);">VIEW THE TERRAIN</span>
+          <i class="fas fa-mountain" style="font-size:.875rem; color:var(--text-dim);"></i>
         </div>
       </div>
-
     </div>
   </div>
+
 </section>
 
+<div style="background:var(--bg-mid); padding:0 5rem;">
+  <hr style="border:none; border-top:1px solid var(--border-dim);" />
+</div>
 
 <!-- ================================================================
-  04. JOURNAL & PARTNERS
+  03. JOURNAL & PARTNERS  —  bg: var(--bg-mid)
 ================================================================ -->
-<section id="journal" class="py-24 sm:py-32" style="background:#1c1917;">
-  <div class="max-w-screen-xl mx-auto px-5 sm:px-10 lg:px-16">
+<section id="journal" style="padding:6rem 0; background:var(--bg-mid); position:relative; z-index:2;">
+  <div style="max-width:1280px; margin:0 auto;" class="px-5 sm:px-10 lg:px-16">
     <div class="fade-in">
 
-      <div class="flex items-baseline gap-4 mb-4">
-        <span class="font-bebas text-5xl leading-none" style="color:#c2410c;">04.</span>
-        <span class="text-[10px] font-bold tracking-[.3em] uppercase font-inter" style="color:#57534e;">EXPEDITION LOG & PARTNERS</span>
+      <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1rem;">
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">03.</span>
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">UPDATE & LOG</span>
       </div>
-      <p class="text-sm font-noto mb-14 max-w-sm" style="color:#78716c;">
+      <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-muted);
+                margin-bottom:3.5rem; max-width:28rem;">
         実績の代わりに、ダム湖が完成するまでの泥臭い開拓プロセスを記録する。
       </p>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+      <div>
 
-        <!-- ログ -->
-        <div class="lg:col-span-7 flex flex-col">
-
-          <!-- LOG #002 -->
-          <article class="journal-row group cursor-pointer py-8 px-0 sm:px-2 transition-colors duration-300">
-            <div class="flex gap-6 sm:gap-10 items-start">
-              <div class="shrink-0 text-right">
-                <div class="font-bebas text-4xl sm:text-5xl leading-none transition-colors duration-300" style="color:#3a3633;">05.16</div>
-                <div class="font-bebas text-lg leading-none" style="color:#3a3633;">2026</div>
-              </div>
-              <div class="flex-1 pt-1">
-                <div class="flex items-center gap-3 mb-3">
-                  <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#c2410c;"></span>
-                  <span class="text-[10px] tracking-[.3em] uppercase font-inter" style="color:#44403c;">LOG #002</span>
-                </div>
-                <h4 class="font-bold text-base sm:text-lg font-noto mb-2 transition-colors duration-300 group-hover:opacity-80" style="color:#e7e5e4;">
-                  設楽ダム周辺フィールドワーク実施
-                </h4>
-                <p class="text-sm leading-relaxed font-noto" style="color:#78716c;">
-                  現地調査にて周辺地形・水面エリアのポテンシャルを確認。フィールド開発計画の初期段階に入る。
-                </p>
-              </div>
+        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
+          <div style="display:flex; gap:2rem; align-items:center;">
+            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.25</div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
             </div>
-          </article>
-
-          <!-- LOG #001 -->
-          <article class="journal-row group cursor-pointer py-8 px-0 sm:px-2 transition-colors duration-300">
-            <div class="flex gap-6 sm:gap-10 items-start">
-              <div class="shrink-0 text-right">
-                <div class="font-bebas text-4xl sm:text-5xl leading-none" style="color:#3a3633;">05.01</div>
-                <div class="font-bebas text-lg leading-none" style="color:#3a3633;">2026</div>
-              </div>
-              <div class="flex-1 pt-1">
-                <div class="flex items-center gap-3 mb-3">
-                  <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#c2410c;"></span>
-                  <span class="text-[10px] tracking-[.3em] uppercase font-inter" style="color:#44403c;">LOG #001</span>
-                </div>
-                <h4 class="font-bold text-base sm:text-lg font-noto mb-2 transition-colors duration-300 group-hover:opacity-80" style="color:#e7e5e4;">
-                  株式会社LOCAL GRID WORKS 始動
-                </h4>
-                <p class="text-sm leading-relaxed font-noto" style="color:#78716c;">
-                  設楽町に新たな会社が産声を上げる。チームが集結し、ダム湖完成後の設楽を最高の遊び場にするための活動が始まった。
-                </p>
-              </div>
-            </div>
-          </article>
-
-          <!-- Upcoming -->
-          <div class="journal-row border-b py-8 px-0 sm:px-2" style="border-color:#292524;">
-            <div class="flex gap-6 sm:gap-10 items-center">
-              <div class="shrink-0 text-right">
-                <div class="font-bebas text-4xl sm:text-5xl leading-none" style="color:#292524;">——</div>
-                <div class="font-bebas text-lg leading-none" style="color:#292524;">——</div>
-              </div>
-              <div>
-                <span class="text-[10px] tracking-[.3em] uppercase font-inter block mb-1" style="color:#44403c;">UPCOMING</span>
-                <p class="text-sm font-noto" style="color:#44403c;">開拓の記録は続く。</p>
-              </div>
+            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #005</span>
+              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
+                ウェブサイト公開
+              </h4>
             </div>
           </div>
+        </article>
 
-        </div>
-
-        <!-- パートナー -->
-        <div class="lg:col-span-4 lg:col-start-9">
-          <div class="mb-6 pb-5 border-b" style="border-color:#292524;">
-            <h3 class="font-bebas text-2xl tracking-[.15em] uppercase" style="color:#e7e5e4;">THE GRID</h3>
-            <p class="text-xs mt-1 font-noto" style="color:#57534e;">連携パートナー / Associated Network</p>
-          </div>
-          <div class="flex flex-col gap-3">
-
-            <div class="partner-card p-4 flex items-center justify-between cursor-pointer group">
-              <div class="flex items-center gap-3">
-                <div class="w-9 h-9 border flex items-center justify-center transition-all duration-300" style="border-color:#3a3633;">
-                  <i class="fas fa-building text-xs transition-colors duration-300" style="color:#57534e;"></i>
-                </div>
-                <div>
-                  <div class="font-bebas text-lg tracking-widest transition-colors duration-300" style="color:#e7e5e4;">TCC</div>
-                  <div class="text-[9px] tracking-widest uppercase font-inter" style="color:#57534e;">Partner / Node</div>
-                </div>
-              </div>
-              <i class="fas fa-external-link-alt text-[9px] transition-colors duration-300" style="color:#44403c;"></i>
+        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
+          <div style="display:flex; gap:2rem; align-items:center;">
+            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.22</div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
             </div>
-
-            <div class="partner-card p-4 flex items-center justify-between cursor-pointer group">
-              <div class="flex items-center gap-3">
-                <div class="w-9 h-9 border flex items-center justify-center transition-all duration-300" style="border-color:#3a3633;">
-                  <i class="fas fa-seedling text-xs transition-colors duration-300" style="color:#57534e;"></i>
-                </div>
-                <div>
-                  <div class="text-sm font-bold font-noto transition-colors duration-300" style="color:#e7e5e4;">遊べる花屋</div>
-                  <div class="text-[9px] tracking-widest uppercase font-inter" style="color:#57534e;">Partner / Node</div>
-                </div>
-              </div>
-              <i class="fas fa-external-link-alt text-[9px]" style="color:#44403c;"></i>
-            </div>
-
-            <div class="partner-card p-4 flex items-center justify-between cursor-pointer group">
-              <div class="flex items-center gap-3">
-                <div class="w-9 h-9 border flex items-center justify-center transition-all duration-300" style="border-color:#3a3633;">
-                  <i class="fas fa-tools text-xs transition-colors duration-300" style="color:#57534e;"></i>
-                </div>
-                <div>
-                  <div class="font-bebas text-lg tracking-widest transition-colors duration-300" style="color:#e7e5e4;">51WORKS</div>
-                  <div class="text-[9px] tracking-widest uppercase font-inter" style="color:#57534e;">Partner / Node</div>
-                </div>
-              </div>
-              <i class="fas fa-external-link-alt text-[9px]" style="color:#44403c;"></i>
-            </div>
-
-            <div class="border border-dashed p-3 flex items-center gap-2" style="border-color:#292524;">
-              <i class="fas fa-plus text-xs" style="color:rgba(194,65,12,.4);"></i>
-              <span class="text-[9px] tracking-[.25em] uppercase font-inter" style="color:#44403c;">Network Expanding</span>
+            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #004</span>
+              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
+                設楽町役場訪問・連携協議開始
+              </h4>
             </div>
           </div>
-        </div>
+        </article>
+
+        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
+          <div style="display:flex; gap:2rem; align-items:center;">
+            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.20</div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #003</span>
+              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
+                第一回フィールド開発計画MTG
+              </h4>
+            </div>
+          </div>
+        </article>
+
+        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
+          <div style="display:flex; gap:2rem; align-items:center;">
+            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.16</div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #002</span>
+              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
+                設楽ダム周辺フィールドワーク実施
+              </h4>
+            </div>
+          </div>
+        </article>
+
+        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer; border-bottom:1px solid var(--border);">
+          <div style="display:flex; gap:2rem; align-items:center;">
+            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.01</div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #001</span>
+              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
+                株式会社LOCAL GRID WORKS 始動
+              </h4>
+            </div>
+          </div>
+        </article>
 
       </div>
     </div>
@@ -613,73 +702,88 @@
 
 
 <!-- ================================================================
-  05. CONTACT
+  05. CONTACT  —  bg: var(--bg-light)
 ================================================================ -->
-<section id="contact" class="pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden" style="background:#100e0c;">
+<section id="contact" style="padding:7rem 0 6rem; background:var(--bg-light); overflow:hidden;">
   <div class="fade-in">
 
-    <div class="px-5 sm:px-10 lg:px-16 mb-3">
-      <p class="text-[10px] font-bold tracking-[.35em] uppercase font-inter mb-4" style="color:#c2410c;">05. JOIN THE GRID / CONTACT</p>
+    <div class="px-5 sm:px-10 lg:px-16" style="margin-bottom:1rem;">
+      <div style="display:flex; align-items:baseline; gap:1rem;">
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">04.</span>
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">JOIN THE GRID / CONTACT</span>
+      </div>
     </div>
-    <div class="px-5 sm:px-10 lg:px-16 clip-text mb-14">
-      <h2 class="font-bebas tracking-wide leading-[.9] uppercase" style="font-size:clamp(4rem,13vw,11rem); color:#e7e5e4;">
-        JOIN THE<br/><span style="color:#c2410c;">GRID.</span>
+    <div class="px-5 sm:px-10 lg:px-16 clip-text" style="margin-bottom:3.5rem;">
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(3.5rem,12vw,10rem);
+                 letter-spacing:.04em; line-height:.9; text-transform:uppercase; color:var(--text-main);">
+        JOIN THE<br/><span style="color:var(--accent);">GRID.</span>
       </h2>
     </div>
 
-    <div class="px-5 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+    <div class="px-5 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12" style="gap:3rem;">
 
       <div class="lg:col-span-4">
-        <p class="text-sm leading-relaxed font-noto mb-8" style="color:#a8a29e;">
+        <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);
+                  line-height:2; margin-bottom:2rem;">
           ご連絡はこちらから。事業のご相談、パートナーシップ、取材、お仕事のご依頼はお気軽にメッセージをお送りください。
         </p>
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 shrink-0 border flex items-center justify-center" style="border-color:rgba(194,65,12,.4);">
-            <i class="fas fa-map-marker-alt text-xs" style="color:#c2410c;"></i>
+        <div style="display:flex; align-items:center; gap:.75rem;">
+          <div style="width:32px; height:32px; border:1px solid rgba(22,163,74,.4);
+                      border-radius:2px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <i class="fas fa-map-marker-alt" style="font-size:11px; color:var(--accent);"></i>
           </div>
           <div>
-            <div class="text-[10px] tracking-[.25em] uppercase font-inter mb-0.5" style="color:#57534e;">Location</div>
-            <div class="text-sm font-noto" style="color:#a8a29e;">愛知県北設楽郡設楽町</div>
+            <div style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:2px;">Location</div>
+            <div style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);">愛知県北設楽郡設楽町</div>
           </div>
         </div>
       </div>
 
       <div class="lg:col-span-7 lg:col-start-6">
-        <form id="contact-form" novalidate class="flex flex-col gap-5">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <form id="contact-form" novalidate style="display:flex; flex-direction:column; gap:1.25rem;">
+          <div class="grid grid-cols-1 sm:grid-cols-2" style="gap:1.25rem;">
             <div>
-              <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">
-                お名前 <span style="color:#c2410c;">*</span>
+              <label style="display:block; font-size:10px; font-weight:700; letter-spacing:.25em;
+                             text-transform:uppercase; color:var(--text-dim); margin-bottom:.5rem;">
+                お名前 <span style="color:var(--accent);">*</span>
               </label>
-              <input type="text" name="name" placeholder="山田 太郎" required class="form-input px-4 py-3 text-sm font-noto" />
+              <input type="text" name="name" placeholder="山田 太郎" required class="form-input"
+                     style="padding:.75rem 1rem; font-size:.875rem;" />
             </div>
             <div>
-              <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">貴社名</label>
-              <input type="text" name="company" placeholder="株式会社 ○○" class="form-input px-4 py-3 text-sm font-noto" />
+              <label style="display:block; font-size:10px; font-weight:700; letter-spacing:.25em;
+                             text-transform:uppercase; color:var(--text-dim); margin-bottom:.5rem;">貴社名</label>
+              <input type="text" name="company" placeholder="株式会社 ○○" class="form-input"
+                     style="padding:.75rem 1rem; font-size:.875rem;" />
             </div>
           </div>
           <div>
-            <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">
-              メールアドレス <span style="color:#c2410c;">*</span>
+            <label style="display:block; font-size:10px; font-weight:700; letter-spacing:.25em;
+                           text-transform:uppercase; color:var(--text-dim); margin-bottom:.5rem;">
+              メールアドレス <span style="color:var(--accent);">*</span>
             </label>
-            <input type="email" name="email" placeholder="example@company.com" required class="form-input px-4 py-3 text-sm font-inter" />
+            <input type="email" name="email" placeholder="example@company.com" required class="form-input"
+                   style="padding:.75rem 1rem; font-size:.875rem;" />
           </div>
           <div>
-            <label class="block text-[10px] font-bold tracking-[.25em] uppercase font-inter mb-2" style="color:#57534e;">
-              お問い合わせ内容 <span style="color:#c2410c;">*</span>
+            <label style="display:block; font-size:10px; font-weight:700; letter-spacing:.25em;
+                           text-transform:uppercase; color:var(--text-dim); margin-bottom:.5rem;">
+              お問い合わせ内容 <span style="color:var(--accent);">*</span>
             </label>
             <textarea name="message" rows="6" required placeholder="お問い合わせ内容をご記入ください。"
-              class="form-input px-4 py-3 text-sm font-noto resize-none"></textarea>
+                      class="form-input" style="padding:.75rem 1rem; font-size:.875rem; resize:none;"></textarea>
           </div>
           <button type="submit" id="submit-btn"
-            class="w-full flex items-center justify-center gap-3 font-inter font-bold text-xs tracking-[.2em] uppercase px-8 py-4 transition-all duration-300 group"
-            style="background:#c2410c; color:#f5f5f4;">
+                  style="width:100%; display:flex; align-items:center; justify-content:center; gap:.75rem;
+                         background:var(--accent); color:#fff; font-weight:700; font-size:12px;
+                         letter-spacing:.2em; text-transform:uppercase; padding:1rem;
+                         border:none; border-radius:4px; cursor:pointer; transition:background .3s ease;"
+                  onmouseover="this.style.background='var(--accent-dark)'" onmouseout="if(!this.disabled) this.style.background='var(--accent)'">
             <span id="submit-label">SEND MESSAGE</span>
-            <i id="submit-icon" class="fas fa-paper-plane text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
+            <i id="submit-icon" class="fas fa-paper-plane" style="font-size:11px;"></i>
           </button>
         </form>
       </div>
-
     </div>
   </div>
 </section>
@@ -688,31 +792,90 @@
 <!-- ================================================================
   FOOTER
 ================================================================ -->
-<footer class="border-t" style="background:#1c1917; border-color:#292524;">
-  <div class="max-w-screen-xl mx-auto px-5 sm:px-8 py-10">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-7">
-      <div class="flex items-center gap-2.5">
-        <span class="inline-block w-[3px] h-6" style="background:#c2410c;"></span>
-        <div>
-          <div class="font-bebas text-lg tracking-[.15em]" style="color:#e7e5e4;">LOCAL GRID WORKS</div>
-          <div class="text-[10px] tracking-wider font-inter" style="color:#57534e;">株式会社LOCAL GRID WORKS</div>
-        </div>
+<footer style="position:relative; z-index:2; border-top:1px solid var(--border); overflow:hidden;">
+  <!-- 背景画像 -->
+  <div aria-hidden="true" style="position:absolute; inset:0; z-index:0;">
+    <img src="image/フッター背景.jpg" alt="" style="width:100%; height:100%; object-fit:cover;">
+    <div style="position:absolute; inset:0; background:rgba(22,48,36,.82);"></div>
+  </div>
+  <div style="max-width:1280px; margin:0 auto; padding:3.5rem 1.25rem 2.5rem; position:relative; z-index:1;" class="sm:px-8">
+
+    <!-- メインコンテンツ：3カラム -->
+    <div style="display:flex; flex-wrap:wrap; gap:3rem; align-items:flex-start; justify-content:space-between; margin-bottom:2.5rem;">
+
+      <!-- 左：会社概要 -->
+      <div style="flex:1; min-width:240px;">
+        <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
+                  color:var(--accent); margin-bottom:1.25rem;">Company Overview</p>
+        <table style="border-collapse:collapse; width:100%;">
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(247,242,233,.08);">
+              <td style="font-size:10px; letter-spacing:.08em; color:rgba(247,242,233,.45);
+                         padding:.55rem 1rem .55rem 0; white-space:nowrap; vertical-align:top;">商号</td>
+              <td style="font-family:'Noto Sans JP',sans-serif; font-size:11px;
+                         color:rgba(247,242,233,.85); padding:.55rem 0; line-height:1.7;">株式会社LOCAL GRID WORKS</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(247,242,233,.08);">
+              <td style="font-size:10px; letter-spacing:.08em; color:rgba(247,242,233,.45);
+                         padding:.55rem 1rem .55rem 0; white-space:nowrap; vertical-align:top;">代表取締役</td>
+              <td style="font-family:'Noto Sans JP',sans-serif; font-size:11px;
+                         color:rgba(247,242,233,.85); padding:.55rem 0; line-height:1.7;">近藤　友樹</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(247,242,233,.08);">
+              <td style="font-size:10px; letter-spacing:.08em; color:rgba(247,242,233,.45);
+                         padding:.55rem 1rem .55rem 0; white-space:nowrap; vertical-align:top;">取締役</td>
+              <td style="font-family:'Noto Sans JP',sans-serif; font-size:11px;
+                         color:rgba(247,242,233,.85); padding:.55rem 0; line-height:1.9;">
+                麻野間　達也<br>安藤　豪規<br>小池　知宏
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(247,242,233,.08);">
+              <td style="font-size:10px; letter-spacing:.08em; color:rgba(247,242,233,.45);
+                         padding:.55rem 1rem .55rem 0; white-space:nowrap; vertical-align:top;">所在地</td>
+              <td style="font-family:'Noto Sans JP',sans-serif; font-size:11px;
+                         color:rgba(247,242,233,.85); padding:.55rem 0; line-height:1.7;">愛知県北設楽郡設楽町</td>
+            </tr>
+            <tr>
+              <td style="font-size:10px; letter-spacing:.08em; color:rgba(247,242,233,.45);
+                         padding:.55rem 1rem .55rem 0; white-space:nowrap; vertical-align:top;">設立</td>
+              <td style="font-family:'Noto Sans JP',sans-serif; font-size:11px;
+                         color:rgba(247,242,233,.85); padding:.55rem 0; line-height:1.7;">2026年5月</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="flex flex-wrap gap-x-7 gap-y-3">
-        <a href="#mission"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">MISSION</a>
-        <a href="#services" class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">SERVICES</a>
-        <a href="#company"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">COMPANY</a>
-        <a href="#journal"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">JOURNAL</a>
-        <a href="#contact"  class="text-[10px] tracking-[.25em] uppercase font-inter transition-colors duration-200" style="color:#57534e;" onmouseover="this.style.color='#c2410c'" onmouseout="this.style.color='#57534e'">CONTACT</a>
+
+      <!-- 中央：ロゴ -->
+      <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:.75rem;">
+        <img src="image/logo-footer.svg" alt="LOCAL GRID WORKS" style="height:140px; width:auto; object-fit:contain;">
+        <p style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(247,242,233,.45);
+                  letter-spacing:.05em; text-align:center; line-height:1.8;">
+          設楽ダムを核とした<br>地域活性化プロジェクト
+        </p>
+      </div>
+
+      <!-- 右：ナビ -->
+      <div style="flex:1; min-width:160px; display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
+        <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
+                  color:var(--accent);">Navigate</p>
+        <a href="#mission"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">MISSION</a>
+        <a href="#services" class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">SERVICES</a>
+        <a href="#journal"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">JOURNAL</a>
+        <a href="#contact"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">CONTACT</a>
+      </div>
+
+    </div>
+
+    <!-- ボトムバー -->
+    <div style="padding-top:1.5rem; border-top:1px solid rgba(247,242,233,.12);
+                display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.75rem;">
+      <p style="font-size:11px; color:rgba(247,242,233,.35);">&copy; 2026 LOCAL GRID WORKS, Inc. All Rights Reserved. Shitara, Aichi, Japan.</p>
+      <div style="display:flex; align-items:center; gap:.5rem;">
+        <span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>
+        <span style="font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(247,242,233,.35);">Build The Grid.</span>
       </div>
     </div>
-    <div class="mt-8 pt-7 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style="border-color:rgba(41,37,36,.6);">
-      <p class="text-xs font-inter" style="color:#44403c;">&copy; 2026 LOCAL GRID WORKS, Inc. All Rights Reserved. Shitara, Aichi, Japan.</p>
-      <div class="flex items-center gap-2">
-        <span class="w-1.5 h-1.5 rounded-full" style="background:#c2410c;"></span>
-        <span class="text-[10px] tracking-[.3em] uppercase font-inter" style="color:#44403c;">Build The Grid.</span>
-      </div>
-    </div>
+
   </div>
 </footer>
 
@@ -729,12 +892,13 @@
   navToggle.addEventListener('click', () => {
     const open = !mobileDrawer.classList.contains('hidden');
     mobileDrawer.classList.toggle('hidden', open);
-    navIcon.className = open ? 'fas fa-bars text-lg' : 'fas fa-times text-lg';
+    navIcon.className = open ? 'fas fa-bars' : 'fas fa-times';
+    navIcon.style.fontSize = '1.1rem';
   });
   document.querySelectorAll('.mobile-link').forEach(l => {
     l.addEventListener('click', () => {
       mobileDrawer.classList.add('hidden');
-      navIcon.className = 'fas fa-bars text-lg';
+      navIcon.className = 'fas fa-bars';
     });
   });
 
@@ -746,6 +910,30 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
+  /* Services tabs */
+  document.querySelectorAll('.svc-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      const imgTarget = target.replace('svc-', 'svc-img-');
+
+      document.querySelectorAll('.svc-panel').forEach(p => p.style.display = 'none');
+      document.querySelectorAll('.svc-tab').forEach(t => {
+        t.style.borderBottomColor = 'transparent';
+        t.style.color = 'var(--text-dim)';
+      });
+      document.querySelectorAll('.svc-img-slot').forEach(s => {
+        s.style.opacity = '0';
+        s.style.pointerEvents = 'none';
+      });
+
+      document.getElementById(target).style.display = 'block';
+      btn.style.borderBottomColor = 'var(--accent)';
+      btn.style.color = 'var(--accent)';
+      document.getElementById(imgTarget).style.opacity = '1';
+      document.getElementById(imgTarget).style.pointerEvents = 'auto';
+    });
+  });
+
   /* Contact form */
   const form        = document.getElementById('contact-form');
   const submitBtn   = document.getElementById('submit-btn');
@@ -755,14 +943,15 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
     submitBtn.disabled = true;
-    submitBtn.style.background = '#44403c';
+    submitBtn.style.background = '#a8a29e';
     submitLabel.textContent = 'MESSAGE SENT';
-    submitIcon.className = 'fas fa-check text-xs';
+    submitIcon.className = 'fas fa-check';
     setTimeout(() => {
       submitBtn.disabled = false;
-      submitBtn.style.background = '#c2410c';
+      submitBtn.style.background = 'var(--accent)';
       submitLabel.textContent = 'SEND MESSAGE';
-      submitIcon.className = 'fas fa-paper-plane text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300';
+      submitIcon.className = 'fas fa-paper-plane';
+      submitIcon.style.fontSize = '11px';
       form.reset();
     }, 3500);
   });
