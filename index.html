@@ -197,14 +197,14 @@
 <!-- ================================================================
   NAVIGATION  —  クリーム背景
 ================================================================ -->
-<nav style="position:fixed; inset:0 0 auto 0; z-index:50; height:56px;
+<nav id="main-nav" style="position:fixed; inset:0 0 auto 0; z-index:50; height:56px;
             background:rgba(247,242,233,.96); backdrop-filter:blur(12px);
-            border-bottom:1px solid var(--border);">
+            border-bottom:1px solid var(--border); transition:background-color .3s ease;">
   <div style="max-width:1280px; margin:0 auto; height:100%;
               padding:0 1.25rem; display:flex; align-items:center; justify-content:space-between;">
 
     <a href="#hero" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
-      <img src="image/logo.svg" alt="LOCAL GRID WORKS" style="height:36px; width:auto; object-fit:contain;">
+      <img src="image/logo_final.png" alt="LOCAL GRID WORKS" style="height:56px; width:auto; object-fit:contain;">
       <span style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.18em; color:var(--text-main);">LOCAL GRID WORKS</span>
     </a>
 
@@ -415,26 +415,17 @@
         <!-- セクションヘッダー -->
         <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2.5rem;">
           <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">02.</span>
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">SERVICES & FIELD OPERATIONS</span>
+          <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">COMMUNITY & FIELD OPERATION</span>
         </div>
 
         <!-- タブボタン -->
         <div style="display:flex; flex-wrap:wrap; border-bottom:2px solid var(--border); margin-bottom:2.5rem;">
 
-          <button class="svc-tab svc-tab-active" data-target="svc-01"
+          <button class="svc-tab svc-tab-active" data-target="svc-02"
                   style="display:flex; align-items:center; gap:.5rem;
                          padding:.75rem 1.5rem .75rem 0; margin-bottom:-2px;
                          background:none; border:none; border-bottom:2px solid var(--accent);
                          cursor:pointer; color:var(--accent);">
-            <i class="fas fa-water" style="font-size:12px;"></i>
-            <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">LAKEFRONT</span>
-          </button>
-
-          <button class="svc-tab" data-target="svc-02"
-                  style="display:flex; align-items:center; gap:.5rem;
-                         padding:.75rem 1.5rem; margin-bottom:-2px;
-                         background:none; border:none; border-bottom:2px solid transparent;
-                         cursor:pointer; color:var(--text-dim);">
             <i class="fas fa-network-wired" style="font-size:12px;"></i>
             <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">COMMUNITY</span>
           </button>
@@ -450,25 +441,8 @@
 
         </div>
 
-        <!-- パネル 01 -->
-        <div id="svc-01" class="svc-panel">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,10vw,9rem);
-                       line-height:1; color:var(--num-color); display:block; margin-bottom:1rem;">01</span>
-          <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
-            <i class="fas fa-water" style="font-size:12px; color:var(--accent);"></i>
-            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">LAKEFRONT PRODUCTION</span>
-          </div>
-          <h3 style="font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:1.5rem;
-                     color:var(--text-main); margin-bottom:1.25rem;">ダム湖活用プロデュース</h3>
-          <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body); line-height:2;">
-            水面利用のアクティビティ企画・運営。ただの観光地ではない、ダイナミックな水辺のエンターテインメントを創造。
-          </p>
-        </div>
-
         <!-- パネル 02 -->
-        <div id="svc-02" class="svc-panel" style="display:none;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,10vw,9rem);
-                       line-height:1; color:var(--num-color); display:block; margin-bottom:1rem;">02</span>
+        <div id="svc-02" class="svc-panel">
           <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
             <i class="fas fa-network-wired" style="font-size:12px; color:var(--accent);"></i>
             <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">COMMUNITY GRID</span>
@@ -482,8 +456,6 @@
 
         <!-- パネル 03 -->
         <div id="svc-03" class="svc-panel" style="display:none;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,10vw,9rem);
-                       line-height:1; color:var(--num-color); display:block; margin-bottom:1rem;">03</span>
           <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
             <i class="fas fa-hammer" style="font-size:12px; color:var(--accent);"></i>
             <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">FIELD DEVELOPMENT</span>
@@ -505,16 +477,9 @@
       ================================================ -->
       <div style="flex:0 0 48%; min-width:280px; position:relative; z-index:2; min-height:520px; background:var(--bg-card);">
 
-        <!-- 01 LAKEFRONT -->
-        <div id="svc-img-01" class="svc-img-slot"
-             style="position:absolute; inset:0; transition:opacity .4s ease;">
-          <img src="image/SUP_image.avif" alt="LAKEFRONT PRODUCTION"
-               style="width:100%; height:100%; object-fit:cover;" />
-        </div>
-
         <!-- 02 COMMUNITY -->
         <div id="svc-img-02" class="svc-img-slot"
-             style="position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .4s ease;">
+             style="position:absolute; inset:0; transition:opacity .4s ease;">
           <img src="" alt="COMMUNITY GRID"
                style="width:100%; height:100%; object-fit:cover; display:none;" />
           <div class="svc-img-placeholder"
@@ -547,6 +512,50 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- ========== 協賛企業 / イベント情報　連動エリア ==========
+         COMMUNITY タブ：svc-extra-02 内のカードのテキストを協賛企業名に書き換えてください
+         FIELD DEV タブ：svc-extra-03 内のカードのテキストをイベント名に書き換えてください
+         カードを増やす場合は同じ .partner-card のブロックをコピーしてください
+    ================================================ -->
+    <div id="partners" style="padding:3rem 5rem 4rem;">
+
+      <div id="svc-extra-02" class="svc-extra-slot">
+        <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">PARTNERS &amp; SPONSORS</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" style="gap:1rem;">
+          <a href="https://www.kankoshitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+            <img src="image/logo_image/logo_設楽町観光協会.svg" alt="設楽町観光協会" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+          </a>
+          <a href="https://michinoeki-shitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+            <img src="image/logo_image/logo_道の駅設楽.svg" alt="道の駅設楽" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+          </a>
+          <a href="https://www.glamping-aichi.com/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+            <img src="image/logo_image/shitaravillage_logo2.png.webp" alt="Shitara Village" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+          </a>
+          <a href="https://www.green-park.net/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+            <img src="image/logo_image/津具高原_logo.png" alt="津具高原" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+          </a>
+          <a href="https://www.instagram.com/marututaguti?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+            <img src="image/logo_image/logo_マルツ田口.webp" alt="マルツ田口" style="width:100%; height:100%; object-fit:cover;" />
+          </a>
+          <a href="https://www.instagram.com/asoberuhanaya?igsh=OTZzdzY0aTl6aTV3" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+            <img src="image/logo_image/logo_遊べる花屋.jpg" alt="遊べる花屋" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+          </a>
+        </div>
+      </div>
+
+      <div id="svc-extra-03" class="svc-extra-slot" style="display:none;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">UPCOMING EVENTS</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" style="gap:1rem;">
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -826,7 +835,7 @@
                          padding:.55rem 1rem .55rem 0; white-space:nowrap; vertical-align:top;">取締役</td>
               <td style="font-family:'Noto Sans JP',sans-serif; font-size:11px;
                          color:rgba(247,242,233,.85); padding:.55rem 0; line-height:1.9;">
-                麻野間　達也<br>安藤　豪規<br>小池　知宏
+                麻野間　達矢<br>安藤　豪規<br>小池　知宏
               </td>
             </tr>
             <tr style="border-bottom:1px solid rgba(247,242,233,.08);">
@@ -847,7 +856,7 @@
 
       <!-- 中央：ロゴ -->
       <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:.75rem;">
-        <img src="image/logo-footer.svg" alt="LOCAL GRID WORKS" style="height:140px; width:auto; object-fit:contain;">
+        <img src="image/logo_circle.png" alt="LOCAL GRID WORKS" style="height:200px; width:auto; object-fit:contain; border-radius:50%;">
         <p style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(247,242,233,.45);
                   letter-spacing:.05em; text-align:center; line-height:1.8;">
           設楽ダムを核とした<br>地域活性化プロジェクト
@@ -860,6 +869,7 @@
                   color:var(--accent);">Navigate</p>
         <a href="#mission"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">MISSION</a>
         <a href="#services" class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">SERVICES</a>
+        <a href="#partners" class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">PARTNER</a>
         <a href="#journal"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">JOURNAL</a>
         <a href="#contact"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">CONTACT</a>
       </div>
@@ -884,6 +894,20 @@
   SCRIPTS
 ================================================================ -->
 <script>
+  /* Nav transparency on scroll */
+  const mainNav = document.getElementById('main-nav');
+  const updateNavOpacity = () => {
+    if (window.scrollY > 40) {
+      mainNav.style.backgroundColor = 'rgba(247,242,233,.25)';
+      mainNav.style.backdropFilter = 'none';
+    } else {
+      mainNav.style.backgroundColor = 'rgba(247,242,233,.96)';
+      mainNav.style.backdropFilter = 'blur(12px)';
+    }
+  };
+  window.addEventListener('scroll', updateNavOpacity);
+  updateNavOpacity();
+
   /* Mobile nav */
   const navToggle    = document.getElementById('nav-toggle');
   const mobileDrawer = document.getElementById('mobile-drawer');
@@ -915,6 +939,7 @@
     btn.addEventListener('click', () => {
       const target = btn.dataset.target;
       const imgTarget = target.replace('svc-', 'svc-img-');
+      const extraTarget = target.replace('svc-', 'svc-extra-');
 
       document.querySelectorAll('.svc-panel').forEach(p => p.style.display = 'none');
       document.querySelectorAll('.svc-tab').forEach(t => {
@@ -925,12 +950,14 @@
         s.style.opacity = '0';
         s.style.pointerEvents = 'none';
       });
+      document.querySelectorAll('.svc-extra-slot').forEach(s => s.style.display = 'none');
 
       document.getElementById(target).style.display = 'block';
       btn.style.borderBottomColor = 'var(--accent)';
       btn.style.color = 'var(--accent)';
       document.getElementById(imgTarget).style.opacity = '1';
       document.getElementById(imgTarget).style.pointerEvents = 'auto';
+      document.getElementById(extraTarget).style.display = 'block';
     });
   });
 
