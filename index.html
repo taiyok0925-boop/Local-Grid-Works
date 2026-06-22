@@ -129,6 +129,10 @@
   /* ジャーナル行 */
   .journal-row { border-top: 1px solid var(--border); transition: background-color .25s ease; }
   .journal-row:hover { background-color: rgba(22,163,74,.04); }
+  .journal-row:hover .log-arrow { border-color: var(--accent); background-color: var(--accent); }
+  .journal-row:hover .log-arrow i { color: #fff; }
+  .log-arrow { transition: border-color .25s ease, background-color .25s ease; }
+  .log-arrow i { transition: color .25s ease; }
 
   /* テキストはみ出し防止 */
   .clip-text { overflow: hidden; }
@@ -407,7 +411,7 @@
   <div class="fade-in">
 
     <!-- 左:タブUI / 右:画像  2カラム分割 -->
-    <div class="border-t border-b border-stone-900" style="display:flex; flex-wrap:wrap; align-items:stretch;">
+    <div class="border-t border-stone-900" style="display:flex; flex-wrap:wrap; align-items:stretch;">
 
       <!-- ========== 左カラム：タブ＋コンテンツ ========== -->
       <div style="flex:1; min-width:300px; padding:5rem 3.5rem 5rem 5rem;">
@@ -436,7 +440,7 @@
                          background:none; border:none; border-bottom:2px solid transparent;
                          cursor:pointer; color:var(--text-dim);">
             <i class="fas fa-hammer" style="font-size:12px;"></i>
-            <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">FIELD DEV</span>
+            <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">EVENT</span>
           </button>
 
         </div>
@@ -522,7 +526,7 @@
     <div id="partners" style="padding:3rem 5rem 4rem;">
 
       <div id="svc-extra-02" class="svc-extra-slot">
-        <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">PARTNERS &amp; SPONSORS</div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">PARTNERS</div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" style="gap:1rem;">
           <a href="https://www.kankoshitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
             <img src="image/logo_image/logo_設楽町観光協会.svg" alt="設楽町観光協会" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
@@ -536,11 +540,14 @@
           <a href="https://www.green-park.net/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
             <img src="image/logo_image/津具高原_logo.png" alt="津具高原" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
           </a>
-          <a href="https://www.instagram.com/marututaguti?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+          <a href="https://www.instagram.com/marututaguti?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:90px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
             <img src="image/logo_image/logo_マルツ田口.webp" alt="マルツ田口" style="width:100%; height:100%; object-fit:cover;" />
           </a>
           <a href="https://www.instagram.com/asoberuhanaya?igsh=OTZzdzY0aTl6aTV3" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
             <img src="image/logo_image/logo_遊べる花屋.jpg" alt="遊べる花屋" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+          </a>
+          <a href="https://www.instagram.com/the_taguchi_culture_club?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:90px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+            <img src="image/logo_image/logo_TaguchiCultureClub.jpg" alt="Taguchi Culture Club" style="width:100%; height:100%; object-fit:cover;" />
           </a>
         </div>
       </div>
@@ -624,83 +631,73 @@
 
       <div>
 
-        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
-          <div style="display:flex; gap:2rem; align-items:center;">
-            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.25</div>
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
-            </div>
-            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
-              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #005</span>
-              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
-                ウェブサイト公開
-              </h4>
-            </div>
+        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; display:flex; align-items:center; gap:1.5rem;">
+          <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+          </div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.05.25</div>
+          <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
+            ウェブサイト公開
+          </h4>
+          <div class="log-arrow" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <i class="fas fa-arrow-right" style="font-size:.7rem; color:var(--text-dim);"></i>
           </div>
         </article>
 
-        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
-          <div style="display:flex; gap:2rem; align-items:center;">
-            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.22</div>
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
-            </div>
-            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
-              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #004</span>
-              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
-                設楽町役場訪問・連携協議開始
-              </h4>
-            </div>
+        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; display:flex; align-items:center; gap:1.5rem;">
+          <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+          </div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.05.22</div>
+          <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
+            設楽町役場訪問・連携協議開始
+          </h4>
+          <div class="log-arrow" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <i class="fas fa-arrow-right" style="font-size:.7rem; color:var(--text-dim);"></i>
           </div>
         </article>
 
-        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
-          <div style="display:flex; gap:2rem; align-items:center;">
-            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.20</div>
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
-            </div>
-            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
-              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #003</span>
-              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
-                第一回フィールド開発計画MTG
-              </h4>
-            </div>
+        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; display:flex; align-items:center; gap:1.5rem;">
+          <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+          </div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.05.20</div>
+          <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
+            第一回フィールド開発計画MTG
+          </h4>
+          <div class="log-arrow" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <i class="fas fa-arrow-right" style="font-size:.7rem; color:var(--text-dim);"></i>
           </div>
         </article>
 
-        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer;">
-          <div style="display:flex; gap:2rem; align-items:center;">
-            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.16</div>
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
-            </div>
-            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
-              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #002</span>
-              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
-                設楽ダム周辺フィールドワーク実施
-              </h4>
-            </div>
+        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; display:flex; align-items:center; gap:1.5rem;">
+          <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+          </div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.05.16</div>
+          <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
+            設楽ダム周辺フィールドワーク実施
+          </h4>
+          <div class="log-arrow" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <i class="fas fa-arrow-right" style="font-size:.7rem; color:var(--text-dim);"></i>
           </div>
         </article>
 
-        <article class="journal-row" style="padding:1.1rem .5rem; cursor:pointer; border-bottom:1px solid var(--border);">
-          <div style="display:flex; gap:2rem; align-items:center;">
-            <div style="flex-shrink:0; text-align:right; min-width:4rem;">
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:2rem; line-height:1; color:var(--border-dim);">05.01</div>
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:.85rem; line-height:1.4; color:var(--border-dim);">2026</div>
-            </div>
-            <div style="flex:1; display:flex; align-items:center; gap:1rem;">
-              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-              <span style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); min-width:5rem;">LOG #001</span>
-              <h4 style="font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); margin:0;">
-                株式会社LOCAL GRID WORKS 始動
-              </h4>
-            </div>
+        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1.5rem;">
+          <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+          </div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.05.01</div>
+          <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
+            株式会社LOCAL GRID WORKS 始動
+          </h4>
+          <div class="log-arrow" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <i class="fas fa-arrow-right" style="font-size:.7rem; color:var(--text-dim);"></i>
           </div>
         </article>
 
@@ -807,7 +804,7 @@
     <img src="image/フッター背景.jpg" alt="" style="width:100%; height:100%; object-fit:cover;">
     <div style="position:absolute; inset:0; background:rgba(22,48,36,.82);"></div>
   </div>
-  <div style="max-width:1280px; margin:0 auto; padding:3.5rem 1.25rem 2.5rem; position:relative; z-index:1;" class="sm:px-8">
+  <div style="max-width:1400px; margin:0 auto; padding:3.5rem 1.25rem 2.5rem; position:relative; z-index:1;" class="sm:px-8">
 
     <!-- メインコンテンツ：3カラム -->
     <div style="display:flex; flex-wrap:wrap; gap:3rem; align-items:flex-start; justify-content:space-between; margin-bottom:2.5rem;">
@@ -874,6 +871,20 @@
         <a href="#contact"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">CONTACT</a>
       </div>
 
+    </div>
+
+    <!-- 協賛企業 -->
+    <div style="margin-bottom:2.5rem; text-align:center;">
+      <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
+                color:var(--accent); margin-bottom:1.25rem;">Supported By</p>
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+        <a href="https://51works.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; width:200px; padding:.5rem; height:70px; display:flex; align-items:center; justify-content:center;">
+          <img src="image/logo_image/logo-51works.svg" alt="51works" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+        </a>
+        <a href="https://fielder2006.com/index.html" target="_blank" rel="noopener" class="partner-card" style="background:#fff; width:200px; padding:.5rem; height:70px; display:flex; align-items:center; justify-content:center;">
+          <img src="image/logo_image/logo_fielder_cropped.png" alt="Fielder" style="max-width:100%; max-height:100%; object-fit:contain;" />
+        </a>
+      </div>
     </div>
 
     <!-- ボトムバー -->
