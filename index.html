@@ -56,15 +56,6 @@
   ::-webkit-scrollbar-track { background: var(--bg-light); }
   ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-  /* ナビ下線 */
-  .nav-link { position: relative; }
-  .nav-link::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 2px; background: var(--accent);
-    transition: width .3s ease;
-  }
-  .nav-link:hover::after { width: 100%; }
-
   /* フォーム入力 */
   .form-input {
     display: block; width: 100%;
@@ -95,13 +86,17 @@
   .fade-in { opacity: 0; transition: opacity .85s ease; }
   .fade-in.visible { opacity: 1; }
 
+  /* 下から上にフェードイン（順番に出現） */
+  .reveal-up { opacity: 0; transform: translateY(28px); transition: opacity 1.2s ease, transform 1.2s ease; }
+  .reveal-up.visible { opacity: 1; transform: translateY(0); }
+
   /* サービス横並び */
   .service-row { border-top: 1px solid var(--border); transition: background-color .25s ease; }
   .service-row:last-child { border-bottom: 1px solid var(--border); }
   .service-row:hover { background-color: rgba(22,163,74,.04); }
 
   /* パートナーカード */
-  .partner-card { border: 1px solid var(--border); border-radius: 2px; transition: border-color .3s ease, background-color .3s ease; }
+  .partner-card { position: relative; z-index: 2; border: 1px solid var(--border); border-radius: 2px; transition: border-color .3s ease, background-color .3s ease; }
   .partner-card:hover { border-color: var(--accent); background-color: rgba(22,163,74,.04); }
 
   /* 会社概要テーブル */
@@ -202,43 +197,42 @@
   NAVIGATION  —  クリーム背景
 ================================================================ -->
 <nav id="main-nav" style="position:fixed; inset:0 0 auto 0; z-index:50; height:56px;
-            background:rgba(247,242,233,.96); backdrop-filter:blur(12px);
-            border-bottom:1px solid var(--border); transition:background-color .3s ease;">
+            background:rgba(247,242,233,0); backdrop-filter:none;
+            border-bottom:1px solid transparent; transition:background-color .3s ease, border-color .3s ease;">
   <div style="max-width:1280px; margin:0 auto; height:100%;
               padding:0 1.25rem; display:flex; align-items:center; justify-content:space-between;">
 
     <a href="#hero" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
       <img src="image/logo_final.png" alt="LOCAL GRID WORKS" style="height:56px; width:auto; object-fit:contain;">
-      <span style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.18em; color:var(--text-main);">LOCAL GRID WORKS</span>
+      <span id="nav-logo-text" style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.18em; color:#f7f2e9; text-shadow:0 1px 6px rgba(0,0,0,.5); transition:color .3s ease, text-shadow .3s ease;">LOCAL GRID WORKS</span>
     </a>
 
-    <div class="hidden md:flex" style="align-items:center; gap:2rem;">
-      <a href="#mission"  class="nav-link" style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); text-decoration:none;">MISSION</a>
-      <a href="#services" class="nav-link" style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); text-decoration:none;">SERVICES</a>
-      <a href="#journal"  class="nav-link" style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); text-decoration:none;">JOURNAL</a>
-      <a href="#contact"
-         style="font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:.25em; text-transform:uppercase;
-                padding:8px 20px; background:var(--accent); color:#fff; text-decoration:none;
-                border-radius:4px; transition:background .2s ease;"
-         onmouseover="this.style.background='var(--accent-dark)'" onmouseout="this.style.background='var(--accent)'">CONTACT</a>
-    </div>
-
-    <button id="nav-toggle" class="md:hidden" style="background:none; border:none; cursor:pointer; color:var(--text-muted);">
+    <button id="nav-toggle" style="background:none; border:none; cursor:pointer; color:#f7f2e9; text-shadow:0 1px 6px rgba(0,0,0,.5); transition:color .3s ease, text-shadow .3s ease;">
       <i id="nav-icon" class="fas fa-bars" style="font-size:1.1rem;"></i>
     </button>
   </div>
 
-  <!-- モバイルドロワー -->
-  <div id="mobile-drawer" class="hidden md:hidden"
-       style="background:var(--bg-light); border-top:1px solid var(--border);">
-    <div style="padding:1.5rem 1.25rem; display:flex; flex-direction:column; gap:4px;">
-      <a href="#mission"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">MISSION</a>
-      <a href="#services" class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">SERVICES</a>
-      <a href="#journal"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">JOURNAL</a>
-      <a href="#contact"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; margin-top:12px; display:block; text-align:center; padding:12px; background:var(--accent); color:#fff; text-decoration:none; border-radius:4px;">CONTACT</a>
-    </div>
-  </div>
 </nav>
+
+<!-- ドロワー背景オーバーレイ -->
+<div id="drawer-backdrop"
+     style="position:fixed; inset:0; z-index:55; background:rgba(0,0,0,.4);
+            opacity:0; pointer-events:none; transition:opacity .35s ease;"></div>
+
+<!-- 右からスライドするドロワー -->
+<div id="mobile-drawer"
+     style="position:fixed; top:56px; right:0; bottom:0; z-index:60;
+            width:50%; min-width:240px; max-width:380px;
+            background:var(--bg-light); border-left:1px solid var(--border);
+            transform:translateX(100%); transition:transform .35s ease;
+            overflow-y:auto;">
+  <div style="padding:1.5rem 1.5rem; display:flex; flex-direction:column; gap:4px;">
+    <a href="#mission"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">MISSION</a>
+    <a href="#services" class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">SERVICES</a>
+    <a href="#journal"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">JOURNAL</a>
+    <a href="#contact"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; margin-top:12px; display:block; text-align:center; padding:12px; background:var(--accent); color:#fff; text-decoration:none; border-radius:4px;">CONTACT</a>
+  </div>
+</div>
 
 
 <!-- ================================================================
@@ -251,8 +245,6 @@
          class="hero-kenburns"
          style="width:100%; height:100%; object-fit:cover;" />
     <div style="position:absolute; inset:0; background:rgba(16,14,12,.55);"></div>
-    <div style="position:absolute; bottom:0; left:0; right:0; height:200px;
-                background:linear-gradient(to bottom, transparent, var(--bg-light));"></div>
   </div>
 
   <div style="position:absolute; bottom:4rem; left:0; z-index:10;
@@ -325,7 +317,7 @@
       <div style="flex:1; min-width:300px; padding:4rem 3.5rem 5rem;
                   display:flex; flex-direction:column; justify-content:center;">
 
-        <div class="clip-text" style="margin-bottom:2rem;">
+        <div class="reveal-up clip-text" style="margin-bottom:2rem; transition-delay:0s;">
           <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,6rem);
                      letter-spacing:.04em; line-height:.92; text-transform:uppercase; color:var(--text-main);">
             BUILD THE GRID.
@@ -336,26 +328,26 @@
           </h2>
         </div>
 
-        <div class="pull-quote" style="padding-left:1.25rem; margin-bottom:1.5rem;">
+        <div class="reveal-up pull-quote" style="padding-left:1.25rem; margin-bottom:1.5rem; transition-delay:.2s;">
           <p style="font-family:'Noto Sans JP',sans-serif; font-size:1.05rem; font-weight:700;
                     color:var(--text-main); line-height:1.85;">
             近い将来ダム湖が完成する設楽。「遊べるダム湖」の実現に向けて。
           </p>
         </div>
 
-        <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);
-                  line-height:2; margin-bottom:1.25rem;">
+        <p class="reveal-up" style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);
+                  line-height:2; margin-bottom:1.25rem; transition-delay:.6s;">
           私たちは、ダム湖という地域資源を「ただ眺めるもの」から「誰もが楽しめるフィールド」へとアップデートしたいと考えて活動しています。
         </p>
-        <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);
-                  line-height:2; margin-bottom:2.5rem;">
+        <p class="reveal-up" style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body);
+                  line-height:2; margin-bottom:2.5rem; transition-delay:.7s;">
           公共空間・人・自然・アクティビティをグリッド（網の目）のように繋ぎ合わせ、新しい地域の価値を創造します。
         </p>
 
         <div style="display:flex; flex-wrap:wrap; gap:1.75rem;">
 
           <!-- CONNECT -->
-          <div style="flex:1; min-width:150px;">
+          <div class="reveal-up" style="flex:1; min-width:150px; transition-delay:.8s;">
             <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;">
               <div style="width:42px; height:42px; flex-shrink:0; background:var(--accent); border-radius:2px;
                           display:flex; align-items:center; justify-content:center;">
@@ -369,7 +361,7 @@
           </div>
 
           <!-- CREATE -->
-          <div style="flex:1; min-width:150px;">
+          <div class="reveal-up" style="flex:1; min-width:150px; transition-delay:.95s;">
             <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;">
               <div style="width:42px; height:42px; flex-shrink:0; background:var(--accent); border-radius:2px;
                           display:flex; align-items:center; justify-content:center;">
@@ -383,7 +375,7 @@
           </div>
 
           <!-- SUSTAIN -->
-          <div style="flex:1; min-width:150px;">
+          <div class="reveal-up" style="flex:1; min-width:150px; transition-delay:1.1s;">
             <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;">
               <div style="width:42px; height:42px; flex-shrink:0; background:var(--accent); border-radius:2px;
                           display:flex; align-items:center; justify-content:center;">
@@ -548,6 +540,9 @@
           </a>
           <a href="https://www.instagram.com/the_taguchi_culture_club?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:90px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
             <img src="image/logo_image/logo_TaguchiCultureClub.jpg" alt="Taguchi Culture Club" style="width:100%; height:100%; object-fit:cover;" />
+          </a>
+          <a href="https://www.houraisen.co.jp/ja/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
+            <img src="image/logo_image/logo_ほうらいせん_cropped.png" alt="ほうらいせん" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
           </a>
         </div>
       </div>
@@ -746,7 +741,7 @@
       </div>
 
       <div class="lg:col-span-7 lg:col-start-6">
-        <form id="contact-form" novalidate style="display:flex; flex-direction:column; gap:1.25rem;">
+        <form id="contact-form" action="https://formspree.io/f/xaqgnqwk" method="POST" novalidate style="display:flex; flex-direction:column; gap:1.25rem;">
           <div class="grid grid-cols-1 sm:grid-cols-2" style="gap:1.25rem;">
             <div>
               <label style="display:block; font-size:10px; font-weight:700; letter-spacing:.25em;
@@ -905,45 +900,78 @@
   SCRIPTS
 ================================================================ -->
 <script>
-  /* Nav transparency on scroll */
-  const mainNav = document.getElementById('main-nav');
+  /* Nav: transparent over the hero photo, solid once scrolled past it */
+  const mainNav     = document.getElementById('main-nav');
+  const navLogoText = document.getElementById('nav-logo-text');
+  const navToggleBtn = document.getElementById('nav-toggle');
+  const heroSection  = document.getElementById('hero');
   const updateNavOpacity = () => {
-    if (window.scrollY > 40) {
-      mainNav.style.backgroundColor = 'rgba(247,242,233,.25)';
-      mainNav.style.backdropFilter = 'none';
-    } else {
+    const heroHeight = heroSection.offsetHeight;
+    const pastHero = window.scrollY > heroHeight - 56;
+    if (pastHero) {
       mainNav.style.backgroundColor = 'rgba(247,242,233,.96)';
       mainNav.style.backdropFilter = 'blur(12px)';
+      mainNav.style.borderBottomColor = 'var(--border)';
+      navLogoText.style.color = 'var(--text-main)';
+      navLogoText.style.textShadow = 'none';
+      navToggleBtn.style.color = 'var(--text-muted)';
+      navToggleBtn.style.textShadow = 'none';
+    } else {
+      mainNav.style.backgroundColor = 'rgba(247,242,233,0)';
+      mainNav.style.backdropFilter = 'none';
+      mainNav.style.borderBottomColor = 'transparent';
+      navLogoText.style.color = '#f7f2e9';
+      navLogoText.style.textShadow = '0 1px 6px rgba(0,0,0,.5)';
+      navToggleBtn.style.color = '#f7f2e9';
+      navToggleBtn.style.textShadow = '0 1px 6px rgba(0,0,0,.5)';
     }
   };
   window.addEventListener('scroll', updateNavOpacity);
   updateNavOpacity();
 
-  /* Mobile nav */
-  const navToggle    = document.getElementById('nav-toggle');
-  const mobileDrawer = document.getElementById('mobile-drawer');
-  const navIcon      = document.getElementById('nav-icon');
+  /* Mobile nav（右からスライドするドロワー） */
+  const navToggle     = document.getElementById('nav-toggle');
+  const mobileDrawer  = document.getElementById('mobile-drawer');
+  const drawerBackdrop = document.getElementById('drawer-backdrop');
+  const navIcon       = document.getElementById('nav-icon');
+
+  const openDrawer = () => {
+    mobileDrawer.style.transform = 'translateX(0)';
+    drawerBackdrop.style.opacity = '1';
+    drawerBackdrop.style.pointerEvents = 'auto';
+    navIcon.className = 'fas fa-times';
+  };
+  const closeDrawer = () => {
+    mobileDrawer.style.transform = 'translateX(100%)';
+    drawerBackdrop.style.opacity = '0';
+    drawerBackdrop.style.pointerEvents = 'none';
+    navIcon.className = 'fas fa-bars';
+  };
 
   navToggle.addEventListener('click', () => {
-    const open = !mobileDrawer.classList.contains('hidden');
-    mobileDrawer.classList.toggle('hidden', open);
-    navIcon.className = open ? 'fas fa-bars' : 'fas fa-times';
-    navIcon.style.fontSize = '1.1rem';
+    const isOpen = mobileDrawer.style.transform === 'translateX(0px)';
+    isOpen ? closeDrawer() : openDrawer();
   });
+  drawerBackdrop.addEventListener('click', closeDrawer);
   document.querySelectorAll('.mobile-link').forEach(l => {
-    l.addEventListener('click', () => {
-      mobileDrawer.classList.add('hidden');
-      navIcon.className = 'fas fa-bars';
-    });
+    l.addEventListener('click', closeDrawer);
   });
 
-  /* Scroll fade-in */
+  /* Scroll fade-in（一度だけ再生） */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  /* 下から上にフェードイン（スクロールで入るたびに再生） */
+  const ioRepeat = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      e.target.classList.toggle('visible', e.isIntersecting);
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal-up').forEach(el => ioRepeat.observe(el));
 
   /* Services tabs */
   document.querySelectorAll('.svc-tab').forEach(btn => {
@@ -978,19 +1006,40 @@
   const submitLabel = document.getElementById('submit-label');
   const submitIcon  = document.getElementById('submit-icon');
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     submitBtn.disabled = true;
     submitBtn.style.background = '#a8a29e';
-    submitLabel.textContent = 'MESSAGE SENT';
-    submitIcon.className = 'fas fa-check';
+    submitLabel.textContent = 'SENDING...';
+    submitIcon.className = 'fas fa-spinner fa-spin';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+
+      if (res.ok) {
+        submitBtn.style.background = '#a8a29e';
+        submitLabel.textContent = 'MESSAGE SENT';
+        submitIcon.className = 'fas fa-check';
+        form.reset();
+      } else {
+        throw new Error('送信に失敗しました');
+      }
+    } catch (err) {
+      submitBtn.style.background = '#b91c1c';
+      submitLabel.textContent = 'FAILED — RETRY';
+      submitIcon.className = 'fas fa-exclamation-triangle';
+    }
+
     setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.style.background = 'var(--accent)';
       submitLabel.textContent = 'SEND MESSAGE';
       submitIcon.className = 'fas fa-paper-plane';
       submitIcon.style.fontSize = '11px';
-      form.reset();
     }, 3500);
   });
 </script>
