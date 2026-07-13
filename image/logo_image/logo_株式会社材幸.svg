@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 428 96" xmlns="http://www.w3.org/2000/svg">
+  <rect width="428" height="96" fill="white"/>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&amp;display=swap');
+  </style>
+  <text font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="11" fill="#111" text-anchor="middle" x="42" y="16">かぶ</text><text font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="11" fill="#111" text-anchor="middle" x="103" y="16">しき</text><text font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="11" fill="#111" text-anchor="middle" x="164" y="16">がい</text><text font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="11" fill="#111" text-anchor="middle" x="225" y="16">しゃ</text><text font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="11" fill="#111" text-anchor="middle" x="310" y="16">ざい</text><text font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="11" fill="#111" text-anchor="middle" x="371" y="16">こう</text>
+  <text font-family="'Noto Sans JP', sans-serif" font-weight="900" font-size="58" fill="white" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke fill" x="12" y="82" letter-spacing="1">株式会社</text>
+  <text font-family="'Noto Sans JP', sans-serif" font-weight="900" font-size="58" fill="white" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke fill" x="279" y="82" letter-spacing="1">材幸</text>
+
+</svg>

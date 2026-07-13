@@ -129,6 +129,13 @@
   .log-arrow { transition: border-color .25s ease, background-color .25s ease; }
   .log-arrow i { transition: color .25s ease; }
 
+  /* タブホバー：浮き上がり */
+  .svc-tab:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,.13) !important; background: rgba(22,163,74,.15) !important; color: var(--text-main) !important; }
+
+  /* 左からフェードイン */
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 1.4s ease, transform 1.4s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
   /* テキストはみ出し防止 */
   .clip-text { overflow: hidden; }
 
@@ -197,17 +204,17 @@
   NAVIGATION  —  クリーム背景
 ================================================================ -->
 <nav id="main-nav" style="position:fixed; inset:0 0 auto 0; z-index:50; height:56px;
-            background:rgba(247,242,233,0); backdrop-filter:none;
-            border-bottom:1px solid transparent; transition:background-color .3s ease, border-color .3s ease;">
+            background:rgba(247,242,233,.4); backdrop-filter:none;
+            border-bottom:1px solid rgba(247,242,233,.3); transition:background-color .3s ease, border-color .3s ease;">
   <div style="max-width:1280px; margin:0 auto; height:100%;
               padding:0 1.25rem; display:flex; align-items:center; justify-content:space-between;">
 
     <a href="#hero" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
       <img src="image/logo_final.png" alt="LOCAL GRID WORKS" style="height:56px; width:auto; object-fit:contain;">
-      <span id="nav-logo-text" style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.18em; color:#f7f2e9; text-shadow:0 1px 6px rgba(0,0,0,.5); transition:color .3s ease, text-shadow .3s ease;">LOCAL GRID WORKS</span>
+      <span id="nav-logo-text" style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.18em; color:var(--text-main); text-shadow:0 0 6px rgba(255,255,255,.85), 0 0 2px rgba(255,255,255,.85);">LOCAL GRID WORKS</span>
     </a>
 
-    <button id="nav-toggle" style="background:none; border:none; cursor:pointer; color:#f7f2e9; text-shadow:0 1px 6px rgba(0,0,0,.5); transition:color .3s ease, text-shadow .3s ease;">
+    <button id="nav-toggle" style="background:none; border:none; cursor:pointer; color:var(--text-muted); text-shadow:0 0 6px rgba(255,255,255,.85), 0 0 2px rgba(255,255,255,.85);">
       <i id="nav-icon" class="fas fa-bars" style="font-size:1.1rem;"></i>
     </button>
   </div>
@@ -290,7 +297,7 @@
 
     <!-- セクションラベル -->
     <div class="px-5 sm:px-10 lg:px-16" style="margin-bottom:2.5rem;">
-      <div style="display:flex; align-items:baseline; gap:1rem;">
+      <div class="reveal-left" style="display:flex; align-items:baseline; gap:1rem;">
         <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">01.</span>
         <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">MISSION / CONCEPT</span>
       </div>
@@ -406,32 +413,34 @@
     <div class="border-t border-stone-900" style="display:flex; flex-wrap:wrap; align-items:stretch;">
 
       <!-- ========== 左カラム：タブ＋コンテンツ ========== -->
-      <div style="flex:1; min-width:300px; padding:5rem 3.5rem 5rem 5rem;">
+      <div id="svc-left-col" style="flex:1; min-width:300px; padding:5rem 3.5rem 5rem 5rem; display:flex; flex-direction:column;">
 
         <!-- セクションヘッダー -->
-        <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2.5rem;">
+        <div class="reveal-left" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2.5rem;">
           <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">02.</span>
           <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">COMMUNITY & FIELD OPERATION</span>
         </div>
 
-        <!-- タブボタン -->
-        <div style="display:flex; flex-wrap:wrap; border-bottom:2px solid var(--border); margin-bottom:2.5rem;">
+        <!-- タブボタン（セグメントコントロール） -->
+        <div style="display:flex; border:1px solid var(--border); border-radius:3px; overflow:hidden; margin-bottom:2.5rem;">
 
           <button class="svc-tab svc-tab-active" data-target="svc-02"
-                  style="display:flex; align-items:center; gap:.5rem;
-                         padding:.75rem 1.5rem .75rem 0; margin-bottom:-2px;
-                         background:none; border:none; border-bottom:2px solid var(--accent);
-                         cursor:pointer; color:var(--accent);">
-            <i class="fas fa-network-wired" style="font-size:12px;"></i>
+                  style="flex:1; display:flex; align-items:center; justify-content:center; gap:.5rem;
+                         padding:.65rem 1.25rem;
+                         background:var(--accent); border:none; border-right:1px solid var(--border); border-radius:0;
+                         cursor:pointer; color:#fff;
+                         transition:background .2s ease, color .2s ease, transform .15s ease;">
+            <i class="fas fa-network-wired" style="font-size:11px;"></i>
             <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">COMMUNITY</span>
           </button>
 
           <button class="svc-tab" data-target="svc-03"
-                  style="display:flex; align-items:center; gap:.5rem;
-                         padding:.75rem 1.5rem; margin-bottom:-2px;
-                         background:none; border:none; border-bottom:2px solid transparent;
-                         cursor:pointer; color:var(--text-dim);">
-            <i class="fas fa-hammer" style="font-size:12px;"></i>
+                  style="flex:1; display:flex; align-items:center; justify-content:center; gap:.5rem;
+                         padding:.65rem 1.25rem;
+                         background:var(--bg-card); border:none; border-radius:0;
+                         cursor:pointer; color:var(--text-dim);
+                         transition:background .2s ease, color .2s ease, transform .15s ease;">
+            <i class="fas fa-flag" style="font-size:11px;"></i>
             <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.15em;">EVENT</span>
           </button>
 
@@ -451,16 +460,36 @@
         </div>
 
         <!-- パネル 03 -->
-        <div id="svc-03" class="svc-panel" style="display:none;">
-          <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
-            <i class="fas fa-hammer" style="font-size:12px; color:var(--accent);"></i>
-            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);">FIELD DEVELOPMENT</span>
+        <div id="svc-03" class="svc-panel" style="display:none; flex:1; flex-direction:column; gap:.75rem;">
+
+          <!-- フィーチャーカード（縦に引き延ばす） -->
+          <div style="flex:1; border:1px solid var(--border); border-radius:2px; padding:2rem; background:var(--bg-card); display:flex; flex-direction:row; gap:1.5rem;">
+
+            <!-- 左：テキスト -->
+            <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
+              <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:.75rem;">FEATURED EVENT</div>
+              <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.06em; color:var(--text-main); margin-bottom:.75rem; line-height:1.2;">FIELD DISCOVERY GAME</h3>
+              <p style="font-family:'Noto Sans JP',sans-serif; font-size:.85rem; color:var(--text-body); line-height:2; margin-bottom:1.5rem; flex:1;">
+                設楽のフィールドを舞台にしたアドベンチャーゲーム。自然の中で仲間と謎を解き、地域の魅力を体感する体験型イベント。
+              </p>
+              <a href="https://fielddiscovery.or.jp/" target="_blank" rel="noopener"
+                 style="display:inline-flex; align-items:center; gap:.5rem;
+                        font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:.12em;
+                        color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:1px;
+                        transition:opacity .2s ease;"
+                 onmouseover="this.style.opacity='.65'" onmouseout="this.style.opacity='1'">
+                FIELDDISCOVERY.OR.JP <i class="fas fa-arrow-right" style="font-size:.65rem;"></i>
+              </a>
+            </div>
+
+            <!-- 右：ロゴ -->
+            <div style="flex:0 0 110px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/FDGlogonew.png" alt="Field Discovery Game"
+                   style="width:100%; height:auto; object-fit:contain;" />
+            </div>
+
           </div>
-          <h3 style="font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:1.5rem;
-                     color:var(--text-main); margin-bottom:1.25rem;">アウトドア・フィールド開発</h3>
-          <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-body); line-height:2;">
-            遊びを豊かにするインフラや拠点の整備。自然を切り拓き、タフで持続可能なフィールドを構築。
-          </p>
+
         </div>
 
       </div>
@@ -471,23 +500,17 @@
              src に画像パスを入れ display:none を削除し
              対応する placeholder div を削除してください
       ================================================ -->
-      <div style="flex:0 0 48%; min-width:280px; position:relative; z-index:2; min-height:520px; background:var(--bg-card);">
+      <div style="flex:0 0 50%; min-width:280px; position:relative; z-index:2; min-height:520px; background:var(--bg-card);">
 
-        <!-- 02 COMMUNITY -->
+        <!-- 02 COMMUNITY slideshow -->
         <div id="svc-img-02" class="svc-img-slot"
              style="position:absolute; inset:0; transition:opacity .4s ease;">
-          <img src="" alt="COMMUNITY GRID"
-               style="width:100%; height:100%; object-fit:cover; display:none;" />
-          <div class="svc-img-placeholder"
-               style="position:absolute; inset:0; display:flex; flex-direction:column;
-                      align-items:center; justify-content:center; gap:1rem;
-                      border:2px dashed var(--border-dim);">
-            <i class="fas fa-network-wired" style="font-size:2rem; color:var(--border-dim);"></i>
-            <div style="text-align:center;">
-              <div style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.2em; color:var(--text-dim);">COMMUNITY IMAGE</div>
-              <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">svc-img-02 の src を設定</div>
-            </div>
-          </div>
+          <img class="community-slide" src="image/挿入イメージ/コミュニティで使える写真２.jpg" alt="COMMUNITY 1"
+               style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity 2s ease;" />
+          <img class="community-slide" src="image/挿入イメージ/コミュニティで使えそうな写真.jpg" alt="COMMUNITY 2"
+               style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 2s ease;" />
+          <img class="community-slide" src="image/挿入イメージ/田口イベント写真３.jpg" alt="COMMUNITY 3"
+               style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 2s ease;" />
         </div>
 
         <!-- 03 FIELD DEVELOPMENT -->
@@ -519,30 +542,43 @@
 
       <div id="svc-extra-02" class="svc-extra-slot">
         <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">PARTNERS</div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" style="gap:1rem;">
-          <a href="https://www.kankoshitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
-            <img src="image/logo_image/logo_設楽町観光協会.svg" alt="設楽町観光協会" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
-          </a>
-          <a href="https://michinoeki-shitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
-            <img src="image/logo_image/logo_道の駅設楽.svg" alt="道の駅設楽" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
-          </a>
-          <a href="https://www.glamping-aichi.com/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
-            <img src="image/logo_image/shitaravillage_logo2.png.webp" alt="Shitara Village" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
-          </a>
-          <a href="https://www.green-park.net/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
-            <img src="image/logo_image/津具高原_logo.png" alt="津具高原" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
-          </a>
-          <a href="https://www.instagram.com/marututaguti?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:90px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-            <img src="image/logo_image/logo_マルツ田口.webp" alt="マルツ田口" style="width:100%; height:100%; object-fit:cover;" />
-          </a>
-          <a href="https://www.instagram.com/asoberuhanaya?igsh=OTZzdzY0aTl6aTV3" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
-            <img src="image/logo_image/logo_遊べる花屋.jpg" alt="遊べる花屋" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
-          </a>
-          <a href="https://www.instagram.com/the_taguchi_culture_club?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:90px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-            <img src="image/logo_image/logo_TaguchiCultureClub.jpg" alt="Taguchi Culture Club" style="width:100%; height:100%; object-fit:cover;" />
-          </a>
-          <a href="https://www.houraisen.co.jp/ja/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.5rem; height:90px; display:flex; align-items:center; justify-content:center;">
-            <img src="image/logo_image/logo_ほうらいせん_cropped.png" alt="ほうらいせん" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+        <div style="display:flex; gap:.75rem; align-items:stretch;">
+          <!-- 10枚：5列×2行 -->
+          <div style="flex:5; display:grid; grid-template-columns:repeat(5,1fr); column-gap:.75rem; row-gap:.15rem;">
+            <a href="https://www.kankoshitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo_設楽町観光協会.svg" alt="設楽町観光協会" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://michinoeki-shitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo_道の駅設楽.svg" alt="道の駅設楽" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://www.glamping-aichi.com/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/shitaravillage_logo2.png.webp" alt="Shitara Village" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://www.instagram.com/marututaguti?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:85px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+              <img src="image/logo_image/logo_マルツ田口.webp" alt="マルツ田口" style="width:100%; height:100%; object-fit:cover;" />
+            </a>
+            <a href="https://www.instagram.com/asoberuhanaya?igsh=OTZzdzY0aTl6aTV3" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo_遊べる花屋.jpg" alt="遊べる花屋" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://www.instagram.com/the_taguchi_culture_club?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:85px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+              <img src="image/logo_image/logo_TaguchiCultureClub.jpg" alt="Taguchi Culture Club" style="width:100%; height:100%; object-fit:cover;" />
+            </a>
+            <a href="https://www.houraisen.co.jp/ja/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo_ほうらいせん_cropped.png" alt="ほうらいせん" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://mikawa-lab.com/?utm_source=GBP&utm_medium=GBP&utm_term=GBP&utm_content=GBP&utm_campaign=GBP" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo_今泉建設.png" alt="今泉建設" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://www.pref.aichi.jp/uploaded/life/376289_1621388_misc.pdf" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo_株式会社材幸.svg" alt="株式会社材幸" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://www.iori39.com/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:0; height:85px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+              <img src="image/logo_image/iori_banner_wood_1.svg" alt="iori" style="width:100%; height:100%; object-fit:cover;" />
+            </a>
+          </div>
+          <!-- 右側：たけうち牧場 縦長カード -->
+          <a href="https://www.takeuchibokujyou.com/" target="_blank" rel="noopener" class="partner-card" style="flex:none; width:96px; height:calc(170px + 0.15rem); background:#fff; padding:0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+            <img src="image/logo_image/logo_たけうち牧場.gif" alt="たけうち牧場" style="width:100%; height:100%; object-fit:cover;" />
           </a>
         </div>
       </div>
@@ -550,11 +586,11 @@
       <div id="svc-extra-03" class="svc-extra-slot" style="display:none;">
         <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">UPCOMING EVENTS</div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" style="gap:1rem;">
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">EVENT NAME</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
+          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
         </div>
       </div>
 
@@ -615,7 +651,7 @@
   <div style="max-width:1280px; margin:0 auto;" class="px-5 sm:px-10 lg:px-16">
     <div class="fade-in">
 
-      <div style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1rem;">
+      <div class="reveal-left" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1rem;">
         <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">03.</span>
         <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">UPDATE & LOG</span>
       </div>
@@ -900,34 +936,19 @@
   SCRIPTS
 ================================================================ -->
 <script>
-  /* Nav: transparent over the hero photo, solid once scrolled past it */
-  const mainNav     = document.getElementById('main-nav');
-  const navLogoText = document.getElementById('nav-logo-text');
-  const navToggleBtn = document.getElementById('nav-toggle');
-  const heroSection  = document.getElementById('hero');
-  const updateNavOpacity = () => {
-    const heroHeight = heroSection.offsetHeight;
-    const pastHero = window.scrollY > heroHeight - 56;
-    if (pastHero) {
-      mainNav.style.backgroundColor = 'rgba(247,242,233,.96)';
-      mainNav.style.backdropFilter = 'blur(12px)';
-      mainNav.style.borderBottomColor = 'var(--border)';
-      navLogoText.style.color = 'var(--text-main)';
-      navLogoText.style.textShadow = 'none';
-      navToggleBtn.style.color = 'var(--text-muted)';
-      navToggleBtn.style.textShadow = 'none';
+  /* Nav：最上部はベージュ不透明、少しでもスクロールしたら半透明 */
+  const mainNav = document.getElementById('main-nav');
+  function updateNav() {
+    if (window.scrollY > 0) {
+      mainNav.style.background = 'rgba(247,242,233,.4)';
+      mainNav.style.borderBottomColor = 'rgba(247,242,233,.3)';
     } else {
-      mainNav.style.backgroundColor = 'rgba(247,242,233,0)';
-      mainNav.style.backdropFilter = 'none';
-      mainNav.style.borderBottomColor = 'transparent';
-      navLogoText.style.color = '#f7f2e9';
-      navLogoText.style.textShadow = '0 1px 6px rgba(0,0,0,.5)';
-      navToggleBtn.style.color = '#f7f2e9';
-      navToggleBtn.style.textShadow = '0 1px 6px rgba(0,0,0,.5)';
+      mainNav.style.background = '#f7f2e9';
+      mainNav.style.borderBottomColor = 'var(--border)';
     }
-  };
-  window.addEventListener('scroll', updateNavOpacity);
-  updateNavOpacity();
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
 
   /* Mobile nav（右からスライドするドロワー） */
   const navToggle     = document.getElementById('nav-toggle');
@@ -973,6 +994,14 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal-up').forEach(el => ioRepeat.observe(el));
 
+  /* 左からフェードイン（スクロールで入るたびに再生） */
+  const ioLeft = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      e.target.classList.toggle('visible', e.isIntersecting);
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.reveal-left').forEach(el => ioLeft.observe(el));
+
   /* Services tabs */
   document.querySelectorAll('.svc-tab').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -982,7 +1011,7 @@
 
       document.querySelectorAll('.svc-panel').forEach(p => p.style.display = 'none');
       document.querySelectorAll('.svc-tab').forEach(t => {
-        t.style.borderBottomColor = 'transparent';
+        t.style.background = 'var(--bg-card)';
         t.style.color = 'var(--text-dim)';
       });
       document.querySelectorAll('.svc-img-slot').forEach(s => {
@@ -991,9 +1020,11 @@
       });
       document.querySelectorAll('.svc-extra-slot').forEach(s => s.style.display = 'none');
 
-      document.getElementById(target).style.display = 'block';
-      btn.style.borderBottomColor = 'var(--accent)';
-      btn.style.color = 'var(--accent)';
+      const activePanel = document.getElementById(target);
+      activePanel.style.display = (target === 'svc-03') ? 'flex' : 'block';
+      document.getElementById('svc-left-col').style.padding = (target === 'svc-03') ? '2.5rem 3.5rem 2.5rem 5rem' : '5rem 3.5rem 5rem 5rem';
+      btn.style.background = 'var(--accent)';
+      btn.style.color = '#fff';
       document.getElementById(imgTarget).style.opacity = '1';
       document.getElementById(imgTarget).style.pointerEvents = 'auto';
       document.getElementById(extraTarget).style.display = 'block';
@@ -1042,6 +1073,18 @@
       submitIcon.style.fontSize = '11px';
     }, 3500);
   });
+
+  /* ── Community slideshow ── */
+  (function() {
+    var slides = document.querySelectorAll('.community-slide');
+    if (!slides.length) return;
+    var current = 0;
+    setInterval(function() {
+      slides[current].style.opacity = '0';
+      current = (current + 1) % slides.length;
+      slides[current].style.opacity = '1';
+    }, 3500);
+  })();
 </script>
 </body>
 </html>
