@@ -208,9 +208,58 @@
       padding-left: 1rem;
     }
 
-    /* PAST EVENTS カルーセル: モバイル */
+    /* フッター: モバイルレイアウト */
+    .footer-main-row {
+      flex-direction: column !important;
+      gap: 1.75rem !important;
+    }
+    .footer-col-overview {
+      width: 100% !important;
+      flex: none !important;
+      min-width: 0 !important;
+    }
+    .footer-col-logo {
+      width: 100% !important;
+      flex: none !important;
+      align-items: center !important;
+    }
+    /* navigate + supported by を横並び */
+    .footer-right-col {
+      width: 100% !important;
+      flex: none !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      gap: 1.5rem !important;
+    }
+    .footer-col-nav {
+      flex: 1 !important;
+      align-items: flex-start !important;
+    }
+    .footer-supported {
+      flex: 1 !important;
+      text-align: left !important;
+    }
+    .footer-supported div {
+      justify-content: flex-start !important;
+    }
+    .footer-supported .partner-card {
+      width: 110px !important;
+      height: 38px !important;
+    }
+
+    /* PAST EVENTS カルーセル: モバイル — テキスト上・ロゴ下の縦積み */
+    #past-events-track > div {
+      flex-direction: column !important;
+    }
     #past-events-track > div > div {
+      flex: none !important;
+      width: 100% !important;
       padding: 1.25rem !important;
+      border-left: none !important;
+      border-top: 1px solid var(--border);
+    }
+    #past-events-track > div > div:first-child {
+      border-top: none !important;
     }
     #past-events-track > div > div h3 {
       font-size: 1.4rem !important;
@@ -938,10 +987,10 @@
   <div style="max-width:1400px; margin:0 auto; padding:3.5rem 1.25rem 2.5rem; position:relative; z-index:1;" class="sm:px-8">
 
     <!-- メインコンテンツ：3カラム -->
-    <div style="display:flex; flex-wrap:wrap; gap:3rem; align-items:flex-start; justify-content:space-between; margin-bottom:2.5rem;">
+    <div class="footer-main-row" style="display:flex; flex-wrap:wrap; gap:3rem; align-items:flex-start; justify-content:space-between; margin-bottom:2.5rem;">
 
       <!-- 左：会社概要 -->
-      <div style="flex:1; min-width:240px;">
+      <div class="footer-col-overview" style="flex:1; min-width:240px;">
         <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
                   color:var(--accent); margin-bottom:1.25rem;">Company Overview</p>
         <table style="border-collapse:collapse; width:100%;">
@@ -983,7 +1032,7 @@
       </div>
 
       <!-- 中央：ロゴ -->
-      <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:.75rem;">
+      <div class="footer-col-logo" style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:.75rem;">
         <img src="image/logo_circle.png" alt="LOCAL GRID WORKS" class="footer-logo" style="height:200px; width:auto; object-fit:contain; border-radius:50%;">
         <p style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(247,242,233,.45);
                   letter-spacing:.05em; text-align:center; line-height:1.8;">
@@ -991,31 +1040,36 @@
         </p>
       </div>
 
-      <!-- 右：ナビ -->
-      <div style="flex:1; min-width:160px; display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
-        <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
-                  color:var(--accent);">Navigate</p>
-        <a href="#mission"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">MISSION</a>
-        <a href="#services" class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">SERVICES</a>
-        <a href="#partners" class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">PARTNER</a>
-        <a href="#journal"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">JOURNAL</a>
-        <a href="#contact"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">CONTACT</a>
+      <!-- 右：ナビ＋協賛まとめラッパー（PCは縦並び、モバイルは横並び） -->
+      <div class="footer-right-col" style="flex:1; min-width:160px; display:flex; flex-direction:column; gap:2rem; align-items:flex-end;">
+
+        <!-- ナビ -->
+        <div class="footer-col-nav" style="display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
+          <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
+                    color:var(--accent); margin:0;">Navigate</p>
+          <a href="#mission"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">MISSION</a>
+          <a href="#services" class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">SERVICES</a>
+          <a href="#partners" class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">PARTNER</a>
+          <a href="#journal"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">JOURNAL</a>
+          <a href="#contact"  class="footer-nav-link" style="font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:rgba(247,242,233,.55); text-decoration:none; transition:color .3s ease;">CONTACT</a>
+        </div>
+
+        <!-- 協賛企業 -->
+        <div class="footer-supported" style="text-align:right;">
+          <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
+                    color:var(--accent); margin-bottom:1.25rem;">Supported By</p>
+          <div style="display:flex; justify-content:flex-end; gap:1rem; flex-wrap:wrap;">
+            <a href="https://51works.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; width:200px; padding:.5rem; height:70px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo-51works.svg" alt="51works" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
+            </a>
+            <a href="https://fielder2006.com/index.html" target="_blank" rel="noopener" class="partner-card" style="background:#fff; width:200px; padding:.5rem; height:70px; display:flex; align-items:center; justify-content:center;">
+              <img src="image/logo_image/logo_fielder_cropped.png" alt="Fielder" style="max-width:100%; max-height:100%; object-fit:contain;" />
+            </a>
+          </div>
+        </div>
+
       </div>
 
-    </div>
-
-    <!-- 協賛企業 -->
-    <div style="margin-bottom:2.5rem; text-align:center;">
-      <p style="font-size:9px; font-weight:700; letter-spacing:.35em; text-transform:uppercase;
-                color:var(--accent); margin-bottom:1.25rem;">Supported By</p>
-      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
-        <a href="https://51works.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; width:200px; padding:.5rem; height:70px; display:flex; align-items:center; justify-content:center;">
-          <img src="image/logo_image/logo-51works.svg" alt="51works" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
-        </a>
-        <a href="https://fielder2006.com/index.html" target="_blank" rel="noopener" class="partner-card" style="background:#fff; width:200px; padding:.5rem; height:70px; display:flex; align-items:center; justify-content:center;">
-          <img src="image/logo_image/logo_fielder_cropped.png" alt="Fielder" style="max-width:100%; max-height:100%; object-fit:contain;" />
-        </a>
-      </div>
     </div>
 
     <!-- ボトムバー -->
