@@ -141,6 +141,89 @@
 
   /* ヒーロー文字シャドウ */
   .hero-shadow { text-shadow: 0 2px 20px rgba(0,0,0,.6); }
+
+  /* =====================================================
+     レスポンシブ対応
+  ===================================================== */
+
+  /* スマートフォン（767px 以下）*/
+  @media (max-width: 767px) {
+    /* Mission / Services 2カラム → 縦積み */
+    .col-img  { flex: 0 0 100% !important; min-width: 0 !important; min-height: 240px !important; }
+    .col-text { flex: 0 0 100% !important; min-width: 0 !important; padding: 2.5rem 1.25rem 3rem !important; }
+    .svc-two-col { flex-direction: column !important; }
+    #svc-left-col { min-width: 0 !important; padding: 2rem 1.25rem !important; }
+    .svc-img-col  { flex: 0 0 100% !important; min-width: 0 !important; min-height: 260px !important; position: relative !important; }
+
+    /* FDGフィーチャーカード → 縦積み */
+    .fdg-card     { flex-direction: column !important; }
+    .fdg-logo-col { flex: none !important; width: 72px !important; align-self: flex-end !important; }
+
+    /* パートナーセクション */
+    #partners    { padding: 1.75rem 1.25rem 2rem !important; }
+    .hr-divider  { padding: 0 1.25rem !important; }
+
+    /* パートナー: 2列グリッド(横長カード) + たけうち牧場をPC比率で右上に配置 */
+    .partner-flex { align-items: flex-start !important; }
+    .partner-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      row-gap: .75rem !important;
+    }
+    .takeuchi-card {
+      display: flex !important;
+      width: 72px !important;
+      height: 127px !important;
+      align-self: flex-start !important;
+    }
+    #svc-extra-02 .partner-grid .partner-card { height: 55px !important; }
+
+    /* EXPLORE SHITARA バナー */
+    .explore-inner {
+      padding: 1.75rem 1.25rem !important;
+      flex-direction: column !important;
+      gap: 1rem !important;
+    }
+
+    /* セクション見出し */
+    .sec-heading { flex-wrap: wrap !important; }
+    .sec-num     { font-size: 2rem !important; }
+    .sec-label   { font-size: 1.75rem !important; line-height: 1.1 !important; }
+
+    /* フッターロゴ */
+    .footer-logo { height: 120px !important; }
+
+    /* ジャーナル行: タグ+日付を縦積み */
+    .journal-row  { align-items: flex-start !important; }
+    .journal-left-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .2rem;
+      flex-shrink: 0;
+      min-width: 5rem;
+    }
+    .journal-left-col .journal-date {
+      min-width: 0 !important;
+      font-size: .78rem !important;
+      padding-left: 1rem;
+    }
+
+    /* PAST EVENTS カルーセル: モバイル */
+    #past-events-track > div > div {
+      padding: 1.25rem !important;
+    }
+    #past-events-track > div > div h3 {
+      font-size: 1.4rem !important;
+    }
+  }
+
+  /* タブレット（768px〜1023px）*/
+  @media (min-width: 768px) and (max-width: 1023px) {
+    #svc-left-col { padding: 3rem 2.5rem 3rem 3rem !important; }
+    #partners     { padding: 2rem 2rem 3rem !important; }
+    .svc-img-col  { min-height: 400px !important; }
+    .col-img      { min-height: 400px !important; }
+  }
 </style>
 </head>
 
@@ -280,6 +363,11 @@
     </div>
   </div>
 
+  <p style="position:absolute; bottom:1rem; left:1rem; z-index:10;
+             font-size:9px; color:rgba(180,180,180,.6); margin:0; font-family:'Noto Sans JP',sans-serif;">
+    ※画像はイメージです
+  </p>
+
   <div style="position:absolute; bottom:3rem; right:2rem; z-index:10;
               display:flex; flex-direction:column; align-items:center; gap:8px;">
     <div style="width:1px; height:48px; background:linear-gradient(to bottom, rgba(247,242,233,.4), transparent);"></div>
@@ -297,9 +385,9 @@
 
     <!-- セクションラベル -->
     <div class="px-5 sm:px-10 lg:px-16" style="margin-bottom:2.5rem;">
-      <div class="reveal-left" style="display:flex; align-items:baseline; gap:1rem;">
-        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">01.</span>
-        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">MISSION / CONCEPT</span>
+      <div class="reveal-left sec-heading" style="display:flex; align-items:baseline; gap:1rem;">
+        <span class="sec-num" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">01.</span>
+        <span class="sec-label" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">MISSION / CONCEPT</span>
       </div>
     </div>
 
@@ -312,7 +400,7 @@
              2. <img> タグの style から "display:none" を削除する
              3. プレースホルダー <div id="mission-img-placeholder"> を削除する
       ================================================ -->
-      <div style="flex:0 0 50%; min-width:280px; position:relative; z-index:2; min-height:540px; background:var(--bg-card);">
+      <div class="col-img" style="flex:0 0 50%; min-width:280px; position:relative; z-index:2; min-height:540px; background:var(--bg-card);">
 
         <img id="mission-img"
              src="image/dam_image_mission2_resized.avif"
@@ -321,7 +409,7 @@
       </div>
 
       <!-- ========== 右カラム：テキスト ========== -->
-      <div style="flex:1; min-width:300px; padding:4rem 3.5rem 5rem;
+      <div class="col-text" style="flex:1; min-width:300px; padding:4rem 3.5rem 5rem;
                   display:flex; flex-direction:column; justify-content:center;">
 
         <div class="reveal-up clip-text" style="margin-bottom:2rem; transition-delay:0s;">
@@ -410,15 +498,15 @@
   <div class="fade-in">
 
     <!-- 左:タブUI / 右:画像  2カラム分割 -->
-    <div class="border-t border-stone-900" style="display:flex; flex-wrap:wrap; align-items:stretch;">
+    <div class="svc-two-col border-t border-stone-900" style="display:flex; flex-wrap:wrap; align-items:stretch;">
 
       <!-- ========== 左カラム：タブ＋コンテンツ ========== -->
       <div id="svc-left-col" style="flex:1; min-width:300px; padding:5rem 3.5rem 5rem 5rem; display:flex; flex-direction:column;">
 
         <!-- セクションヘッダー -->
-        <div class="reveal-left" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2.5rem;">
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">02.</span>
-          <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">COMMUNITY & FIELD OPERATION</span>
+        <div class="reveal-left sec-heading" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:2.5rem;">
+          <span class="sec-num" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">02.</span>
+          <span class="sec-label" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">COMMUNITY & FIELD OPERATION</span>
         </div>
 
         <!-- タブボタン（セグメントコントロール） -->
@@ -463,11 +551,11 @@
         <div id="svc-03" class="svc-panel" style="display:none; flex:1; flex-direction:column; gap:.75rem;">
 
           <!-- フィーチャーカード（縦に引き延ばす） -->
-          <div style="flex:1; border:1px solid var(--border); border-radius:2px; padding:2rem; background:var(--bg-card); display:flex; flex-direction:row; gap:1.5rem;">
+          <div class="fdg-card" style="flex:1; border:1px solid var(--border); border-radius:2px; padding:2rem; background:var(--bg-card); display:flex; flex-direction:row; gap:1.5rem;">
 
             <!-- 左：テキスト -->
             <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
-              <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:.75rem;">FEATURED EVENT</div>
+              <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:.75rem;">UPCOMING EVENT</div>
               <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.06em; color:var(--text-main); margin-bottom:.75rem; line-height:1.2;">FIELD DISCOVERY GAME</h3>
               <p style="font-family:'Noto Sans JP',sans-serif; font-size:.85rem; color:var(--text-body); line-height:2; margin-bottom:1.5rem; flex:1;">
                 設楽のフィールドを舞台にしたアドベンチャーゲーム。自然の中で仲間と謎を解き、地域の魅力を体感する体験型イベント。
@@ -483,9 +571,11 @@
             </div>
 
             <!-- 右：ロゴ -->
-            <div style="flex:0 0 110px; display:flex; align-items:center; justify-content:center;">
-              <img src="image/logo_image/FDGlogonew.png" alt="Field Discovery Game"
-                   style="width:100%; height:auto; object-fit:contain;" />
+            <div class="fdg-logo-col" style="flex:0 0 110px; display:flex; align-items:center; justify-content:center;">
+              <a href="https://fielddiscovery.or.jp/" target="_blank" rel="noopener" style="display:block; width:100%;">
+                <img src="image/logo_image/FDGlogonew.png" alt="Field Discovery Game"
+                     style="width:100%; height:auto; object-fit:contain;" />
+              </a>
             </div>
 
           </div>
@@ -500,7 +590,7 @@
              src に画像パスを入れ display:none を削除し
              対応する placeholder div を削除してください
       ================================================ -->
-      <div style="flex:0 0 50%; min-width:280px; position:relative; z-index:2; min-height:520px; background:var(--bg-card);">
+      <div class="svc-img-col" style="flex:0 0 50%; min-width:280px; position:relative; z-index:2; min-height:520px; background:var(--bg-card);">
 
         <!-- 02 COMMUNITY slideshow -->
         <div id="svc-img-02" class="svc-img-slot"
@@ -516,8 +606,10 @@
         <!-- 03 EVENT -->
         <div id="svc-img-03" class="svc-img-slot"
              style="position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .4s ease;">
-          <img src="image/挿入イメージ/FDGimage2.jpg" alt="Field Discovery Game"
-               style="width:100%; height:100%; object-fit:cover;" />
+          <a href="https://fielddiscovery.or.jp/" target="_blank" rel="noopener" style="display:block; width:100%; height:100%;">
+            <img src="image/挿入イメージ/FDGimage2.jpg" alt="Field Discovery Game"
+                 style="width:100%; height:100%; object-fit:cover;" />
+          </a>
         </div>
 
       </div>
@@ -532,9 +624,9 @@
 
       <div id="svc-extra-02" class="svc-extra-slot">
         <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">PARTNERS</div>
-        <div style="display:flex; gap:.75rem; align-items:stretch;">
+        <div class="partner-flex" style="display:flex; gap:.75rem; align-items:stretch;">
           <!-- 10枚：5列×2行 -->
-          <div style="flex:5; display:grid; grid-template-columns:repeat(5,1fr); column-gap:.75rem; row-gap:.15rem;">
+          <div class="partner-grid" style="flex:5; display:grid; grid-template-columns:repeat(5,1fr); column-gap:.75rem; row-gap:.15rem;">
             <a href="https://www.kankoshitara.jp/" target="_blank" rel="noopener" class="partner-card" style="background:#fff; padding:.4rem; height:85px; display:flex; align-items:center; justify-content:center;">
               <img src="image/logo_image/logo_設楽町観光協会.svg" alt="設楽町観光協会" style="max-width:100%; max-height:100%; width:100%; height:100%; object-fit:contain;" />
             </a>
@@ -567,21 +659,61 @@
             </a>
           </div>
           <!-- 右側：たけうち牧場 縦長カード -->
-          <a href="https://www.takeuchibokujyou.com/" target="_blank" rel="noopener" class="partner-card" style="flex:none; width:96px; height:calc(170px + 0.15rem); background:#fff; padding:0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <a href="https://www.takeuchibokujyou.com/" target="_blank" rel="noopener" class="partner-card takeuchi-card" style="flex:none; width:96px; height:calc(170px + 0.15rem); background:#fff; padding:0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
             <img src="image/logo_image/logo_たけうち牧場.gif" alt="たけうち牧場" style="width:100%; height:100%; object-fit:cover;" />
           </a>
         </div>
       </div>
 
       <div id="svc-extra-03" class="svc-extra-slot" style="display:none;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">UPCOMING EVENTS</div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" style="gap:1rem;">
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
-          <div class="partner-card" style="padding:1.5rem .75rem; text-align:center;"><span style="font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.1em; color:var(--text-dim);">COMING SOON</span></div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1.25rem;">PAST EVENTS</div>
+
+        <!-- カルーセルラッパー -->
+        <div style="position:relative; overflow:hidden;">
+          <div id="past-events-track" style="display:flex; transition:transform .55s ease;">
+
+            <!-- ▼ カード1: SHITARA WORLD CLASSIC CAR RALLY FESTIVAL -->
+            <div style="min-width:100%; display:flex; align-items:stretch; border:1px solid var(--border); border-radius:2px; overflow:hidden;">
+
+              <!-- テキストエリア -->
+              <div style="flex:1; padding:1.5rem 2rem; background:var(--bg-card); display:flex; flex-direction:column; justify-content:center; gap:.6rem;">
+                <div style="display:flex; align-items:center; gap:.6rem;">
+                  <span style="font-size:9px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; background:var(--text-body); color:var(--bg-light); padding:2px 8px; border-radius:2px;">PAST EVENT</span>
+                  <span style="font-size:10px; letter-spacing:.15em; color:var(--text-dim);">2025.11.30</span>
+                </div>
+                <h3 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(1.3rem,2.8vw,2rem); letter-spacing:.05em; line-height:1.15; color:var(--text-main); margin:0;">
+                  SHITARA WORLD CLASSIC CAR RALLY FESTIVAL
+                </h3>
+                <p style="font-family:'Noto Sans JP',sans-serif; font-size:.8rem; color:var(--text-body); line-height:1.8; margin:0;">
+                  旧車が山中を駆け抜ける、設楽ならではのクラシックカーラリーフェスティバル。
+                </p>
+                <a href="https://n-classiccar-jp.com/wccfes/" target="_blank" rel="noopener"
+                   style="display:inline-flex; align-items:center; gap:.5rem; align-self:flex-start;
+                          font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:.12em;
+                          color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:1px;
+                          transition:opacity .2s ease;"
+                   onmouseover="this.style.opacity='.65'" onmouseout="this.style.opacity='1'">
+                  OFFICIAL SITE <i class="fas fa-arrow-right" style="font-size:.65rem;"></i>
+                </a>
+              </div>
+
+              <!-- 右：ロゴ -->
+              <div style="flex:0 0 340px; padding:1.5rem 2rem; background:var(--bg-card); display:flex; align-items:center; justify-content:center; border-left:1px solid var(--border);">
+                <a href="https://n-classiccar-jp.com/wccfes/" target="_blank" rel="noopener" style="display:block; width:100%; max-width:300px;">
+                  <img src="image/logo_image/logo_shitaraClassicCarFestival.jpg" alt="SHITARA CLASSIC CAR FESTIVAL logo"
+                       style="width:100%; height:auto; object-fit:contain;" />
+                </a>
+              </div>
+
+            </div>
+            <!-- ▲ カード1 ここまで。追加する場合は上記ブロックをコピー -->
+
+          </div>
+
+          <!-- ナビゲーションドット（複数カード時のみ表示） -->
+          <div id="past-events-dots" style="display:none;"></div>
         </div>
+
       </div>
 
     </div>
@@ -602,7 +734,7 @@
              onmouseout="this.style.opacity='.32'; this.style.transform='scale(1)'" />
         <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(237,232,221,.95), transparent);"></div>
       </div>
-      <div style="position:relative; z-index:1; padding:3rem 3.5rem;
+      <div class="explore-inner" style="position:relative; z-index:1; padding:3rem 3.5rem;
                   display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:2rem;">
         <div>
           <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:1rem;">
@@ -630,7 +762,7 @@
 
 </section>
 
-<div style="background:var(--bg-mid); padding:0 5rem;">
+<div class="hr-divider" style="background:var(--bg-mid); padding:0 5rem;">
   <hr style="border:none; border-top:1px solid var(--border-dim);" />
 </div>
 
@@ -641,23 +773,25 @@
   <div style="max-width:1280px; margin:0 auto;" class="px-5 sm:px-10 lg:px-16">
     <div class="fade-in">
 
-      <div class="reveal-left" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1rem;">
-        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">03.</span>
-        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">UPDATE & LOG</span>
+      <div class="reveal-left sec-heading" style="display:flex; align-items:baseline; gap:1rem; margin-bottom:1rem;">
+        <span class="sec-num" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">03.</span>
+        <span class="sec-label" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">UPDATE & LOG</span>
       </div>
       <p style="font-family:'Noto Sans JP',sans-serif; font-size:.875rem; color:var(--text-muted);
                 margin-bottom:3.5rem; max-width:28rem;">
-        実績の代わりに、ダム湖が完成するまでの泥臭い開拓プロセスを記録する。
+        ダム湖が完成するまでの開拓プロセスと、コミュニティの動きをリアルタイムで記録していきます。
       </p>
 
       <div>
 
         <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; display:flex; align-items:center; gap:1.5rem;">
-          <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
-            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+          <div class="journal-left-col">
+            <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+            </div>
+            <div class="journal-date" style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.07.13</div>
           </div>
-          <div style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.07.13</div>
           <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
             ウェブサイト公開
           </h4>
@@ -666,12 +800,30 @@
           </div>
         </article>
 
-        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1.5rem;">
-          <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
-            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
-            <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; display:flex; align-items:center; gap:1.5rem;">
+          <div class="journal-left-col">
+            <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">EVENT</span>
+            </div>
+            <div class="journal-date" style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.06.15</div>
           </div>
-          <div style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.05.01</div>
+          <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
+            Field Discovery Game in 設楽　日程決定
+          </h4>
+          <div class="log-arrow" style="width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <i class="fas fa-arrow-right" style="font-size:.7rem; color:var(--text-dim);"></i>
+          </div>
+        </article>
+
+        <article class="journal-row" style="padding:1.25rem .5rem; cursor:pointer; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1.5rem;">
+          <div class="journal-left-col">
+            <div style="display:flex; align-items:center; gap:.6rem; min-width:6.5rem; flex-shrink:0;">
+              <span style="width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0;"></span>
+              <span style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim);">COMPANY</span>
+            </div>
+            <div class="journal-date" style="font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--border-dim); min-width:6rem; flex-shrink:0;">2026.05.01</div>
+          </div>
           <h4 style="flex:1; font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text-main); margin:0;">
             LOCAL GRID WORKS株式会社　始動
           </h4>
@@ -693,9 +845,9 @@
   <div class="fade-in">
 
     <div class="px-5 sm:px-10 lg:px-16" style="margin-bottom:1rem;">
-      <div style="display:flex; align-items:baseline; gap:1rem;">
-        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">04.</span>
-        <span style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">JOIN THE GRID / CONTACT</span>
+      <div class="sec-heading" style="display:flex; align-items:baseline; gap:1rem;">
+        <span class="sec-num" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:var(--accent);">04.</span>
+        <span class="sec-label" style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; font-weight:400; letter-spacing:.05em; text-transform:uppercase; color:#111;">JOIN THE GRID / CONTACT</span>
       </div>
     </div>
     <div class="px-5 sm:px-10 lg:px-16 clip-text" style="margin-bottom:3.5rem;">
@@ -832,7 +984,7 @@
 
       <!-- 中央：ロゴ -->
       <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:.75rem;">
-        <img src="image/logo_circle.png" alt="LOCAL GRID WORKS" style="height:200px; width:auto; object-fit:contain; border-radius:50%;">
+        <img src="image/logo_circle.png" alt="LOCAL GRID WORKS" class="footer-logo" style="height:200px; width:auto; object-fit:contain; border-radius:50%;">
         <p style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(247,242,233,.45);
                   letter-spacing:.05em; text-align:center; line-height:1.8;">
           設楽ダムを核とした<br>地域活性化プロジェクト
@@ -970,7 +1122,10 @@
 
       const activePanel = document.getElementById(target);
       activePanel.style.display = (target === 'svc-03') ? 'flex' : 'block';
-      document.getElementById('svc-left-col').style.padding = (target === 'svc-03') ? '2.5rem 3.5rem 2.5rem 5rem' : '5rem 3.5rem 5rem 5rem';
+      const isMobile = window.innerWidth < 768;
+      document.getElementById('svc-left-col').style.padding = isMobile
+        ? '2rem 1.25rem'
+        : (target === 'svc-03' ? '2.5rem 3.5rem 2.5rem 5rem' : '5rem 3.5rem 5rem 5rem');
       btn.style.background = 'var(--accent)';
       btn.style.color = '#fff';
       document.getElementById(imgTarget).style.opacity = '1';
@@ -1033,6 +1188,20 @@
       slides[current].style.opacity = '1';
     }, 3500);
   })();
+
+  /* ── Past Events carousel ── */
+  var pastCurrentIndex = 0;
+  function pastGoTo(index) {
+    var track = document.getElementById('past-events-track');
+    if (!track) return;
+    var cards = track.children;
+    var total = cards.length;
+    pastCurrentIndex = (index + total) % total;
+    track.style.transform = 'translateX(-' + (pastCurrentIndex * 100) + '%)';
+    document.querySelectorAll('.past-dot').forEach(function(dot, i) {
+      dot.style.background = i === pastCurrentIndex ? 'var(--accent)' : 'var(--border)';
+    });
+  }
 </script>
 </body>
 </html>
