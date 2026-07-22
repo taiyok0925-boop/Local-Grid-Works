@@ -103,6 +103,50 @@
   .profile-row { transition: background-color .2s ease; }
   .profile-row:hover { background-color: rgba(22,163,74,.04); }
 
+  /* ドロワーナビ */
+  .drawer-item {
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    text-decoration: none;
+    padding: .9rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-main);
+    transition: color .2s ease;
+  }
+  .drawer-item:last-child { border-bottom: none; }
+  .drawer-item::before {
+    content: attr(data-num);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: .7rem;
+    letter-spacing: .15em;
+    color: var(--accent);
+    flex-shrink: 0;
+    line-height: 1;
+    padding-top: .15rem;
+  }
+  .drawer-item span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: .08em;
+    line-height: 1;
+  }
+  .drawer-item:hover { color: var(--accent); }
+
+  /* ハンバーガー → X アニメーション */
+  #nav-toggle.is-open .hb-line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+    width: 100% !important;
+  }
+  #nav-toggle.is-open .hb-line:nth-child(2) {
+    opacity: 0;
+    width: 0 !important;
+  }
+  #nav-toggle.is-open .hb-line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+    width: 100% !important;
+  }
+
   /* フッターナビリンク アンダーライン */
   .footer-nav-link { position: relative; }
   .footer-nav-link::after {
@@ -346,8 +390,21 @@
       <span id="nav-logo-text" style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.18em; color:var(--text-main); text-shadow:0 0 6px rgba(255,255,255,.85), 0 0 2px rgba(255,255,255,.85);">LOCAL GRID WORKS</span>
     </a>
 
-    <button id="nav-toggle" style="background:none; border:none; cursor:pointer; color:var(--text-muted); text-shadow:0 0 6px rgba(255,255,255,.85), 0 0 2px rgba(255,255,255,.85);">
-      <i id="nav-icon" class="fas fa-bars" style="font-size:1.1rem;"></i>
+    <button id="nav-toggle" aria-label="メニュー"
+            style="background:none; border:none; cursor:pointer; padding:4px 2px;
+                   display:flex; flex-direction:column; gap:5px; align-items:flex-end; width:28px;">
+      <span class="hb-line" style="display:block; height:1.5px; width:100%;
+            background:var(--text-main); border-radius:1px;
+            box-shadow:0 0 4px rgba(255,255,255,.7);
+            transition:transform .35s ease, opacity .25s ease, width .35s ease;"></span>
+      <span class="hb-line" style="display:block; height:1.5px; width:60%;
+            background:var(--text-main); border-radius:1px;
+            box-shadow:0 0 4px rgba(255,255,255,.7);
+            transition:transform .35s ease, opacity .25s ease, width .35s ease;"></span>
+      <span class="hb-line" style="display:block; height:1.5px; width:100%;
+            background:var(--text-main); border-radius:1px;
+            box-shadow:0 0 4px rgba(255,255,255,.7);
+            transition:transform .35s ease, opacity .25s ease, width .35s ease;"></span>
     </button>
   </div>
 
@@ -361,16 +418,24 @@
 <!-- 右からスライドするドロワー -->
 <div id="mobile-drawer"
      style="position:fixed; top:56px; right:0; bottom:0; z-index:60;
-            width:50%; min-width:240px; max-width:380px;
-            background:var(--bg-light); border-left:1px solid var(--border);
-            transform:translateX(100%); transition:transform .35s ease;
-            overflow-y:auto;">
-  <div style="padding:1.5rem 1.5rem; display:flex; flex-direction:column; gap:4px;">
-    <a href="#mission"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">MISSION</a>
-    <a href="#services" class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">SERVICES</a>
-    <a href="#journal"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--text-muted); padding:12px 0; border-bottom:1px solid var(--border); text-decoration:none;">JOURNAL</a>
-    <a href="#contact"  class="mobile-link" style="font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; margin-top:12px; display:block; text-align:center; padding:12px; background:var(--accent); color:#fff; text-decoration:none; border-radius:4px;">CONTACT</a>
+            width:72%; min-width:260px; max-width:360px;
+            background:var(--bg-mid); border-left:1px solid var(--border);
+            transform:translateX(100%); transition:transform .42s cubic-bezier(.77,0,.18,1);
+            overflow-y:auto; display:flex; flex-direction:column; justify-content:space-between;">
+
+  <!-- ナビリンク -->
+  <nav style="padding:2.5rem 2rem 2rem;">
+    <a href="#mission"  class="mobile-link drawer-item" data-num="01"><span>MISSION</span></a>
+    <a href="#services" class="mobile-link drawer-item" data-num="02"><span>SERVICES</span></a>
+    <a href="#journal"  class="mobile-link drawer-item" data-num="03"><span>JOURNAL</span></a>
+    <a href="#contact"  class="mobile-link drawer-item" data-num="04"><span>CONTACT</span></a>
+  </nav>
+
+  <!-- ボトム -->
+  <div style="padding:1.5rem 2rem; border-top:1px solid var(--border);">
+    <p style="font-family:'Noto Sans JP',sans-serif; font-size:9px; letter-spacing:.15em; color:var(--text-dim);">LOCAL GRID WORKS, Inc.<br>Shitara, Aichi, Japan</p>
   </div>
+
 </div>
 
 
@@ -1108,19 +1173,17 @@
   const navToggle     = document.getElementById('nav-toggle');
   const mobileDrawer  = document.getElementById('mobile-drawer');
   const drawerBackdrop = document.getElementById('drawer-backdrop');
-  const navIcon       = document.getElementById('nav-icon');
-
   const openDrawer = () => {
     mobileDrawer.style.transform = 'translateX(0)';
     drawerBackdrop.style.opacity = '1';
     drawerBackdrop.style.pointerEvents = 'auto';
-    navIcon.className = 'fas fa-times';
+    navToggle.classList.add('is-open');
   };
   const closeDrawer = () => {
     mobileDrawer.style.transform = 'translateX(100%)';
     drawerBackdrop.style.opacity = '0';
     drawerBackdrop.style.pointerEvents = 'none';
-    navIcon.className = 'fas fa-bars';
+    navToggle.classList.remove('is-open');
   };
 
   navToggle.addEventListener('click', () => {
